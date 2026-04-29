@@ -7,32 +7,34 @@
 
 ## Mô tả ý tưởng
 
-[BRIEF_CONTENT]
+Create a professional, corporate-style landing page to introduce company services, showcase value, and capture leads.
 
 ---
 
 ## Target Users
 <!-- Ai sẽ dùng app này? -->
-- **Primary:** [User chính]
-- **Secondary:** [User phụ nếu có]
+- **Primary:** Corporate clients looking for professional services.
+- **Secondary:** Potential partners and recruiters.
 
 ## Problem
 <!-- Vấn đề gì cần giải quyết? -->
-[Mô tả vấn đề]
+The company currently lacks a professional digital presence to communicate its value proposition to potential clients effectively.
 
 ## Key Features (brain dump)
 <!-- Liệt kê tính năng muốn có, không cần chuẩn -->
-- [Feature 1]
-- [Feature 2]
-- [Feature 3]
+- Hero section with clear value proposition and CTA.
+- Service showcase section.
+- Trust/Testimonials section.
+- Lead capture contact form placeholder.
+- Basic analytics tracking placeholders (GA4).
 
 ## Tech Preferences (nếu có)
 <!-- Stack muốn dùng, constraints, etc. -->
-[Để trống nếu chưa biết — AI sẽ đề xuất trong Phase 0]
+Static HTML, CSS, and Vanilla JavaScript (for speed and simplicity).
 
 ## Constraints
 <!-- Budget, timeline, platform requirements, etc. -->
-[Để trống nếu chưa có]
+Professional design aesthetic required. Flexible timeline.
 
 ---
 

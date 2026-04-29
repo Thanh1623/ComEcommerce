@@ -62,10 +62,13 @@ KHÔNG viết code, KHÔNG scaffold, KHÔNG implement cho đến khi có file sp
 ---
 
 ## Stack
-[Điền sau Phase 0]
+- Static HTML/CSS/JavaScript (Phase 1 MVP)
 
 ## Folder Structure
-[Điền sau Phase 0]
+- docs/specs/
+- docs/decisions/
+- tasks/
+- memory/
 
 ---
 
@@ -99,9 +102,9 @@ KHÔNG viết code, KHÔNG scaffold, KHÔNG implement cho đến khi có file sp
 
 ---
 
-## Phase & Task
+-## Phase & Task
 
-- **Current Phase:** Phase 0 — Planning (chưa bắt đầu)
+- **Current Phase:** Phase 1 — Landingpage MVP (Phase 0 planning completed)
 - **Tasks:** xem `tasks/todo.md`
 - **Phase details:** xem `docs/phases/phase-0.md`
 
