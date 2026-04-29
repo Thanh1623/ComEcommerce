@@ -11,5 +11,5 @@
 ## Phase 2: Refinement & Polish
 - [x] Integrate finalized content copy
 - [x] Implement client-side form validation
-- [in_progress] Optimize images and assets
-- [pending] Final cross-device testing
+- [x] Optimize images and assets
+- [in_progress] Final cross-device testing

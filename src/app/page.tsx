@@ -54,15 +54,18 @@ export default function Home() {
         <section id="services" className="py-20 px-6 max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold mb-12 text-center text-emerald-900">Sản Phẩm Đặc Sản</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="border border-emerald-100 p-8 rounded-lg shadow-sm hover:shadow-md transition">
+            <div className="border border-emerald-100 p-8 rounded-lg shadow-sm hover:shadow-md transition flex flex-col items-center text-center">
+              <img src="/assets/com-tuoi.svg" alt="Cốm Tươi Làng Vòng" className="w-12 h-12 mb-4" />
               <h3 className="text-xl font-semibold mb-2 text-emerald-800">Cốm Tươi Làng Vòng</h3>
               <p>Cốm mới giã, xanh non, thơm dịu, chuẩn hương vị truyền thống.</p>
             </div>
-            <div className="border border-emerald-100 p-8 rounded-lg shadow-sm hover:shadow-md transition">
+            <div className="border border-emerald-100 p-8 rounded-lg shadow-sm hover:shadow-md transition flex flex-col items-center text-center">
+              <img src="/assets/banh-com.svg" alt="Bánh Cốm" className="w-12 h-12 mb-4" />
               <h3 className="text-xl font-semibold mb-2 text-emerald-800">Bánh Cốm</h3>
               <p>Vỏ bánh dẻo thơm hòa quyện cùng nhân đậu xanh bùi ngậy.</p>
             </div>
-            <div className="border border-emerald-100 p-8 rounded-lg shadow-sm hover:shadow-md transition">
+            <div className="border border-emerald-100 p-8 rounded-lg shadow-sm hover:shadow-md transition flex flex-col items-center text-center">
+              <img src="/assets/com-kho.svg" alt="Cốm Khô Đặc Biệt" className="w-12 h-12 mb-4" />
               <h3 className="text-xl font-semibold mb-2 text-emerald-800">Cốm Khô Đặc Biệt</h3>
               <p>Lựa chọn hoàn hảo để chế biến các món ngon quanh năm.</p>
             </div>
