@@ -62,7 +62,7 @@ KHÔNG viết code, KHÔNG scaffold, KHÔNG implement cho đến khi có file sp
 ---
 
 ## Stack
-- Static HTML/CSS/JavaScript (Phase 1 MVP)
+- Next.js (App Router), Tailwind CSS, shadcn/ui
 
 ## Folder Structure
 - docs/specs/
