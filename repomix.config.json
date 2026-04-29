@@ -1,0 +1,21 @@
+{
+  "output": {
+    "filePath": "context/repomix-output.md",
+    "style": "markdown"
+  },
+  "ignore": {
+    "useGitignore": true,
+    "useDefaultPatterns": true,
+    "customPatterns": [
+      "memory/",
+      "context/",
+      "docs/knowledge/",
+      "docs/decisions/",
+      "repo-map.md",
+      "*.md"
+    ]
+  },
+  "security": {
+    "enableSecurityCheck": true
+  }
+}

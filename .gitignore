@@ -1,0 +1,37 @@
+# .gitignore
+
+# Dependencies
+node_modules/
+.cache/
+
+# Build
+dist/
+build/
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+*.log
+
+# Memory (private session logs)
+memory/*.md
+!memory/.gitkeep
+
+# Codebase context (large, regenerate with ./scripts/generate-context.sh)
+context/repomix-output.md
+context/repomix-output.xml
+context/repomix-output.txt
+context/repo-map.md
+
+# Code-Review-Graph (knowledge graph cache — regenerate with code-review-graph build)
+.code-review-graph/
+
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
