@@ -1,4 +1,36 @@
+'use client';
+
+import { useState } from 'react';
+
 export default function Home() {
+  const [formData, setFormData] = useState({ name: '', email: '' });
+  const [errors, setErrors] = useState({ name: '', email: '' });
+
+  const validate = () => {
+    let isValid = true;
+    const newErrors = { name: '', email: '' };
+
+    if (!formData.name) {
+      newErrors.name = 'Vui lòng nhập tên.';
+      isValid = false;
+    }
+    if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Vui lòng nhập email hợp lệ.';
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (validate()) {
+      alert('Đã gửi yêu cầu thành công!');
+      setFormData({ name: '', email: '' });
+    }
+  };
+
   return (
     <div className="font-sans text-gray-800">
       <header className="bg-emerald-800 text-white p-6">
@@ -45,9 +77,27 @@ export default function Home() {
 
         <section id="contact" className="py-20 px-6 max-w-md mx-auto">
           <h2 className="text-3xl font-bold mb-8 text-center text-emerald-900">Liên Hệ Đặt Hàng</h2>
-          <form className="flex flex-col gap-4">
-            <input type="text" placeholder="Họ và tên" className="border border-gray-300 p-3 rounded" required />
-            <input type="email" placeholder="Email" className="border border-gray-300 p-3 rounded" required />
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <div>
+              <input
+                type="text"
+                placeholder="Họ và tên"
+                className="w-full border border-gray-300 p-3 rounded"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              />
+              {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+            </div>
+            <div>
+              <input
+                type="email"
+                placeholder="Email"
+                className="w-full border border-gray-300 p-3 rounded"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              />
+              {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+            </div>
             <button type="submit" className="bg-emerald-800 text-white p-3 rounded hover:bg-emerald-700">Gửi Yêu Cầu</button>
           </form>
         </section>
