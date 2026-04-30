@@ -17,6 +17,6 @@
 ## Phase 3: Product Catalog
 - [x] Create product data structure (mock data)
 - [x] Create product listing page
-- [in_progress] Create product detail page
-- [pending] Configure dynamic routing
+- [x] Create product detail page
+- [in_progress] Configure dynamic routing
 
