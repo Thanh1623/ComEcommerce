@@ -25,3 +25,9 @@
 - [x] Update "Add to cart" button in product detail
 - [x] Create Cart page
 - [x] Add cart indicator to Header
+
+## Phase 5: Checkout Flow
+- [x] Create Checkout page
+- [in_progress] Implement checkout form validation
+- [pending] Build "Place Order" flow
+- [pending] Create "Thank You" page
