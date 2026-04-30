@@ -18,8 +18,7 @@
 
 <!-- AI tự thêm entries ở đây khi tạo knowledge file mới -->
 <!-- Format: - [Title](./filename.md) — Status — 1-line summary -->
-
-_Chưa có learnings. Sẽ được thêm khi phát hiện patterns trong quá trình phát triển._
+- [Local Development Workflow](./2026-04-30-local-dev-workflow.md) — 📝 Draft — How to run the dev server in the background persistently.
 
 ---
 
