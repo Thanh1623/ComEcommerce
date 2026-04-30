@@ -24,4 +24,4 @@
 - [x] Create Cart Context
 - [x] Update "Add to cart" button in product detail
 - [x] Create Cart page
-- [in_progress] Add cart indicator to Header
+- [x] Add cart indicator to Header
