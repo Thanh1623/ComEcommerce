@@ -18,5 +18,5 @@
 - [x] Create product data structure (mock data)
 - [x] Create product listing page
 - [x] Create product detail page
-- [in_progress] Configure dynamic routing
+- [x] Configure dynamic routing
 
