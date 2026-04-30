@@ -15,7 +15,8 @@
 - [x] Final cross-device testing
 
 ## Phase 3: Product Catalog
-- [in_progress] Create product data structure (mock data)
-- [pending] Create product listing page
-- [pending] Create product detail page
+- [x] Create product data structure (mock data)
+- [x] Create product listing page
+- [in_progress] Create product detail page
 - [pending] Configure dynamic routing
+
