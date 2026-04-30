@@ -20,3 +20,8 @@
 - [x] Create product detail page
 - [x] Configure dynamic routing
 
+## Phase 4: Shopping Cart
+- [x] Create Cart Context
+- [in_progress] Update "Add to cart" button in product detail
+- [pending] Create Cart page
+- [pending] Add cart indicator to Header
