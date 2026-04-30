@@ -22,6 +22,6 @@
 
 ## Phase 4: Shopping Cart
 - [x] Create Cart Context
-- [in_progress] Update "Add to cart" button in product detail
-- [pending] Create Cart page
+- [x] Update "Add to cart" button in product detail
+- [in_progress] Create Cart page
 - [pending] Add cart indicator to Header

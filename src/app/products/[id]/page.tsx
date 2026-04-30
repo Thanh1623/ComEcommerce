@@ -1,13 +1,18 @@
+'use client';
+
 import { products } from '@/data/products';
 import { notFound } from 'next/navigation';
+import { useCart } from '@/context/CartContext';
+import { use } from 'react';
 
 interface ProductDetailPageProps {
   params: Promise<{ id: string }>;
 }
 
-export default async function ProductDetail({ params }: ProductDetailPageProps) {
-  const { id } = await params;
+export default function ProductDetail({ params }: ProductDetailPageProps) {
+  const { id } = use(params);
   const product = products.find((p) => p.id === id);
+  const { addToCart } = useCart();
 
   if (!product) {
     notFound();
@@ -21,7 +26,12 @@ export default async function ProductDetail({ params }: ProductDetailPageProps) 
         <p className="text-gray-600 mb-6 text-lg text-center">{product.description}</p>
         <p className="text-2xl font-bold text-emerald-900 text-center">{product.price.toLocaleString('vi-VN')} đ</p>
         <div className="text-center mt-8">
-            <button className="bg-emerald-800 text-white px-8 py-3 rounded-full hover:bg-emerald-700">Thêm vào giỏ hàng</button>
+            <button 
+                onClick={() => addToCart(product)}
+                className="bg-emerald-800 text-white px-8 py-3 rounded-full hover:bg-emerald-700"
+            >
+                Thêm vào giỏ hàng
+            </button>
         </div>
       </div>
     </div>
