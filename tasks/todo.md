@@ -29,5 +29,5 @@
 ## Phase 5: Checkout Flow
 - [x] Create Checkout page
 - [x] Implement checkout form validation
-- [in_progress] Build "Place Order" flow
-- [pending] Create "Thank You" page
+- [x] Build "Place Order" flow
+- [x] Create "Thank You" page

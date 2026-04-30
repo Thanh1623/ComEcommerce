@@ -2,9 +2,11 @@
 
 import { useState } from 'react';
 import { useCart } from '@/context/CartContext';
+import { useRouter } from 'next/navigation';
 
 export default function CheckoutPage() {
-  const { cart } = useCart();
+  const { cart, clearCart } = useCart();
+  const router = useRouter();
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   const [formData, setFormData] = useState({ name: '', phone: '', address: '' });
@@ -34,7 +36,8 @@ export default function CheckoutPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validate()) {
-      alert('Đơn hàng của bạn đã được đặt thành công!');
+      clearCart();
+      router.push('/thank-you');
     }
   };
 
