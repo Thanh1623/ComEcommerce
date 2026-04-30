@@ -1,14 +1,41 @@
 'use client';
 
+import { useState } from 'react';
 import { useCart } from '@/context/CartContext';
 
 export default function CheckoutPage() {
   const { cart } = useCart();
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
+  const [formData, setFormData] = useState({ name: '', phone: '', address: '' });
+  const [errors, setErrors] = useState({ name: '', phone: '', address: '' });
+
+  const validate = () => {
+    let isValid = true;
+    const newErrors = { name: '', phone: '', address: '' };
+
+    if (!formData.name) {
+      newErrors.name = 'Vui lòng nhập họ và tên.';
+      isValid = false;
+    }
+    if (!formData.phone || formData.phone.length < 10) {
+      newErrors.phone = 'Vui lòng nhập số điện thoại hợp lệ.';
+      isValid = false;
+    }
+    if (!formData.address) {
+      newErrors.address = 'Vui lòng nhập địa chỉ giao hàng.';
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Đơn hàng của bạn đã được đặt thành công!');
+    if (validate()) {
+      alert('Đơn hàng của bạn đã được đặt thành công!');
+    }
   };
 
   return (
@@ -16,9 +43,36 @@ export default function CheckoutPage() {
       <h2 className="text-3xl font-bold mb-12 text-center text-emerald-900">Thanh Toán</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <input type="text" placeholder="Họ và tên" className="border border-gray-300 p-3 rounded w-full" required />
-          <input type="text" placeholder="Số điện thoại" className="border border-gray-300 p-3 rounded w-full" required />
-          <input type="text" placeholder="Địa chỉ giao hàng" className="border border-gray-300 p-3 rounded w-full col-span-1 md:col-span-2" required />
+          <div>
+            <input 
+              type="text" 
+              placeholder="Họ và tên" 
+              className="border border-gray-300 p-3 rounded w-full" 
+              value={formData.name}
+              onChange={(e) => setFormData({...formData, name: e.target.value})}
+            />
+            {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+          </div>
+          <div>
+            <input 
+              type="text" 
+              placeholder="Số điện thoại" 
+              className="border border-gray-300 p-3 rounded w-full" 
+              value={formData.phone}
+              onChange={(e) => setFormData({...formData, phone: e.target.value})}
+            />
+            {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+          </div>
+          <div className="col-span-1 md:col-span-2">
+            <input 
+              type="text" 
+              placeholder="Địa chỉ giao hàng" 
+              className="border border-gray-300 p-3 rounded w-full" 
+              value={formData.address}
+              onChange={(e) => setFormData({...formData, address: e.target.value})}
+            />
+            {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address}</p>}
+          </div>
         </div>
         
         <div className="border-t pt-6">
