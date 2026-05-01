@@ -81,13 +81,13 @@ export default function Home() {
 
       {/* Services Section */}
       <motion.section 
-        className="py-20 px-6 max-w-6xl mx-auto bg-gradient-to-br from-white to-emerald-50 rounded-3xl"
+        className="py-20 px-6 max-w-6xl mx-auto"
         variants={sectionVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
-        <h2 className="text-4xl font-extrabold mb-12 text-center text-emerald-950">Sản Phẩm Đặc Sản</h2>
+        <h2 className="text-3xl font-bold mb-12 text-center text-emerald-900">Sản Phẩm Đặc Sản</h2>
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
           variants={containerVariants}
@@ -99,30 +99,32 @@ export default function Home() {
             { 
               id: 'com-tuoi', 
               name: 'Cốm Tươi Làng Vòng', 
-              icon: <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-16 h-16 mb-4 text-emerald-500"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>,
-              desc: 'Cốm mới giã, xanh non, thơm dịu, chuẩn vị truyền thống.' 
+              icon: <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 mb-4 text-emerald-500"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>,
+              desc: 'Cốm mới giã, xanh non, thơm dịu.' 
             },
             { 
               id: 'banh-com', 
               name: 'Bánh Cốm', 
-              icon: <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-16 h-16 mb-4 text-emerald-500"><rect width="20" height="12" x="2" y="6" rx="2"/><path d="M12 12h.01"/><path d="M17 12h.01"/><path d="M7 12h.01"/></svg>,
-              desc: 'Vỏ bánh dẻo thơm hòa quyện cùng nhân đậu xanh bùi ngậy.' 
+              icon: <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 mb-4 text-emerald-500"><rect width="20" height="12" x="2" y="6" rx="2"/><path d="M12 12h.01"/><path d="M17 12h.01"/><path d="M7 12h.01"/></svg>,
+              desc: 'Vỏ dẻo thơm, nhân đậu xanh bùi.' 
             },
             { 
               id: 'com-kho', 
               name: 'Cốm Khô Đặc Biệt', 
-              icon: <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-16 h-16 mb-4 text-emerald-500"><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.9 4.9 1.4 1.4"/><path d="m17.7 17.7 1.4 1.4"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.3 17.7-1.4 1.4"/><path d="m19.1 6.3-1.4-1.4"/></svg>,
-              desc: 'Lựa chọn hoàn hảo để chế biến các món ngon quanh năm.' 
+              icon: <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 mb-4 text-emerald-500"><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.9 4.9 1.4 1.4"/><path d="m17.7 17.7 1.4 1.4"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.3 17.7-1.4 1.4"/><path d="m19.1 6.3-1.4-1.4"/></svg>,
+              desc: 'Lựa chọn hoàn hảo quanh năm.' 
             }
           ].map((prod) => (
             <Link href={`/products/${prod.id}`} key={prod.id}>
               <motion.div 
-                className="bg-white border-none p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col items-center text-center cursor-pointer h-full"
+                className="border-2 border-emerald-100 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition flex flex-col items-center text-center cursor-pointer h-full bg-white"
                 variants={itemVariants}
-                whileHover={{ y: -10, scale: 1.02 }}
+                animate={{ y: [0, -15, 0] }}
+                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
               >
                 {prod.icon}
-                <h3 className="text-2xl font-bold mb-3 text-emerald-950">{prod.name}</h3>
+                <h3 className="text-2xl font-bold mb-2 text-emerald-900">{prod.name}</h3>
                 <p className="text-gray-600">{prod.desc}</p>
               </motion.div>
             </Link>
