@@ -137,9 +137,24 @@ export default function Home() {
           viewport={{ once: true, amount: 0.2 }}
         >
           {[
-            { id: 'com-tuoi', name: 'Cốm Tươi Làng Vòng', img: '/assets/com-tuoi.svg', desc: 'Cốm mới giã, xanh non, thơm dịu.' },
-            { id: 'banh-com', name: 'Bánh Cốm', img: '/assets/banh-com.svg', desc: 'Vỏ dẻo thơm, nhân đậu xanh bùi.' },
-            { id: 'com-kho', name: 'Cốm Khô Đặc Biệt', img: '/assets/com-kho.svg', desc: 'Lựa chọn hoàn hảo quanh năm.' }
+            { 
+              id: 'com-tuoi', 
+              name: 'Cốm Tươi Làng Vòng', 
+              icon: <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="w-12 h-12 mb-4 text-emerald-500"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>,
+              desc: 'Cốm mới giã, xanh non, thơm dịu.' 
+            },
+            { 
+              id: 'banh-com', 
+              name: 'Bánh Cốm', 
+              icon: <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="w-12 h-12 mb-4 text-emerald-500"><rect width="20" height="12" x="2" y="6" rx="2"/><path d="M12 12h.01"/><path d="M17 12h.01"/><path d="M7 12h.01"/></svg>,
+              desc: 'Vỏ dẻo thơm, nhân đậu xanh bùi.' 
+            },
+            { 
+              id: 'com-kho', 
+              name: 'Cốm Khô Đặc Biệt', 
+              icon: <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="w-12 h-12 mb-4 text-emerald-500"><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.9 4.9 1.4 1.4"/><path d="m17.7 17.7 1.4 1.4"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.3 17.7-1.4 1.4"/><path d="m19.1 6.3-1.4-1.4"/></svg>,
+              desc: 'Lựa chọn hoàn hảo quanh năm.' 
+            }
           ].map((prod) => (
             <Link href={`/products/${prod.id}`} key={prod.id}>
               <motion.div 
@@ -147,7 +162,7 @@ export default function Home() {
                 variants={itemVariants}
                 whileHover={{ y: -10 }}
               >
-                <img src={prod.img} alt={prod.name} className="w-16 h-16 mb-4" />
+                {prod.icon}
                 <h3 className="text-xl font-semibold mb-2 text-emerald-800">{prod.name}</h3>
                 <p>{prod.desc}</p>
               </motion.div>
