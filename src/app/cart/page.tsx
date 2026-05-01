@@ -6,7 +6,6 @@ import ProductIcon from '@/components/ProductIcon';
 
 export default function CartPage() {
   const { cart, removeFromCart } = useCart();
-
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (

@@ -1,4 +1,10 @@
 import Link from 'next/link';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Đặt hàng thành công | Cốm Làng Vòng',
+  description: 'Cảm ơn bạn đã mua hàng tại Cốm Làng Vòng.',
+};
 
 export default function ThankYouPage() {
   return (

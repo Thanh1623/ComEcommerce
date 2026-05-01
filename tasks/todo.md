@@ -39,7 +39,7 @@
 - [x] Integrate scroll-triggered animations
 
 ## Phase 7: UI Polish, SEO & Deployment
-- [x] Integrate shadcn/ui components (Toast, Dialog)
-- [in_progress] Implement dynamic SEO Metadata
-- [pending] Add loading skeletons
+- [x] Integrate shadcn/ui components (Toast)
+- [x] Implement dynamic SEO Metadata (for public pages)
+- [in_progress] Add loading skeletons
 - [pending] Prepare for Deployment (Vercel)
