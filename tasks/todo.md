@@ -37,3 +37,9 @@
 - [x] Add "Story" and "Process" sections
 - [x] Enhance Hero section with layout/images
 - [x] Integrate scroll-triggered animations
+
+## Phase 7: UI Polish, SEO & Deployment
+- [x] Integrate shadcn/ui components (Toast, Dialog)
+- [in_progress] Implement dynamic SEO Metadata
+- [pending] Add loading skeletons
+- [pending] Prepare for Deployment (Vercel)

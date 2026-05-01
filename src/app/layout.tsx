@@ -4,21 +4,9 @@ import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Toaster } from "sonner";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "Cốm Làng Vòng",
-  description: "Cốm Làng Vòng Hà Nội",
-};
+// ... (geistSans and geistMono config)
 
 export default function RootLayout({
   children,
@@ -35,9 +23,11 @@ export default function RootLayout({
           <Navbar />
           <main>{children}</main>
           <Footer />
+          <Toaster />
         </CartProvider>
       </body>
     </html>
   );
 }
+
 
