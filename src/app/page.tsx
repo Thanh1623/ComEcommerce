@@ -119,8 +119,8 @@ export default function Home() {
               <motion.div 
                 className="border-2 border-emerald-100 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition flex flex-col items-center text-center cursor-pointer h-full bg-white"
                 variants={itemVariants}
-                animate={{ y: [0, -15, 0] }}
-                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                animate={{ y: [0, -5, 0] }}
+                transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
                 whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
               >
                 {prod.icon}
