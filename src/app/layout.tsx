@@ -30,10 +30,10 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
-      <body className="flex flex-col">
+      <body>
         <CartProvider>
           <Navbar />
-          <main className="flex-grow">{children}</main>
+          <main>{children}</main>
           <Footer />
         </CartProvider>
       </body>

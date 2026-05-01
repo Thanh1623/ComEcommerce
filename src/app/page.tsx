@@ -38,7 +38,7 @@ export default function Home() {
   };
 
   return (
-    <main className="overflow-x-hidden">
+    <main>
       {/* Hero Section */}
       <motion.section 
         className="bg-emerald-50 py-24 text-center px-6"
