@@ -43,8 +43,8 @@ export default function CheckoutPage() {
 
   return (
     <div className="py-20 px-6 max-w-4xl mx-auto">
-      <h2 className="text-5xl font-extrabold mb-4 text-center text-emerald-950 tracking-tight">Thanh Toán</h2>
-      <div className="w-24 h-1 bg-emerald-500 mx-auto mb-16 rounded-full"></div>
+      <h2 className="text-5xl font-extrabold mb-4 text-center text-emerald-800 tracking-tight">Thanh Toán</h2>
+      <div className="w-24 h-1 bg-emerald-400 mx-auto mb-16 rounded-full"></div>
       
       <form onSubmit={handleSubmit} className="space-y-6 bg-white p-8 rounded-2xl shadow-xl border-2 border-emerald-100">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -81,14 +81,14 @@ export default function CheckoutPage() {
         </div>
         
         <div className="border-t-2 border-emerald-100 pt-6">
-          <h3 className="text-2xl font-semibold mb-4 text-emerald-900">Đơn hàng của bạn</h3>
+          <h3 className="text-2xl font-semibold mb-4 text-emerald-800">Đơn hàng của bạn</h3>
           {cart.map((item) => (
-            <div key={item.id} className="flex justify-between py-2 text-emerald-800">
+            <div key={item.id} className="flex justify-between py-2 text-emerald-700">
               <span>{item.name} x {item.quantity}</span>
-              <span className="font-semibold">{(item.price * item.quantity).toLocaleString('vi-VN')} đ</span>
+              <span className="font-semibold">{ (item.price * item.quantity).toLocaleString('vi-VN')} đ</span>
             </div>
           ))}
-          <div className="text-right text-3xl font-bold text-emerald-950 mt-6">
+          <div className="text-right text-3xl font-bold text-emerald-800 mt-6">
             Tổng cộng: {total.toLocaleString('vi-VN')} đ
           </div>
         </div>
@@ -98,3 +98,4 @@ export default function CheckoutPage() {
     </div>
   );
 }
+
