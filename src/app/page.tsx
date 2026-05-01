@@ -81,17 +81,17 @@ export default function Home() {
 
       {/* Story Section */}
       <motion.section 
-        className="py-20 px-6 max-w-4xl mx-auto text-center"
+        className="py-20 px-8 max-w-4xl mx-auto text-center bg-white rounded-3xl shadow-2xl border-t-4 border-emerald-600 my-16"
         variants={sectionVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
       >
-        <h2 className="text-4xl font-bold mb-8 text-emerald-900">Câu chuyện Cốm Làng Vòng</h2>
-        <p className="text-lg text-gray-700 leading-relaxed">
-          Cốm Làng Vòng không chỉ là một món ăn, mà là cả một nền văn hóa, một mảnh hồn của Hà Nội cổ kính. 
+        <h2 className="text-4xl font-extrabold mb-8 text-emerald-950">Câu chuyện Cốm Làng Vòng</h2>
+        <p className="text-xl text-emerald-800 leading-relaxed italic">
+          "Cốm Làng Vòng không chỉ là một món ăn, mà là cả một nền văn hóa, một mảnh hồn của Hà Nội cổ kính. 
           Qua bao thăng trầm, nghề làm cốm tại Làng Vòng vẫn được gìn giữ như một báu vật, 
-          chắt lọc những hạt lúa nếp cái hoa vàng tinh túy nhất của đất trời.
+          chắt lọc những hạt lúa nếp cái hoa vàng tinh túy nhất của đất trời."
         </p>
       </motion.section>
 
