@@ -52,7 +52,7 @@ export default function CheckoutPage() {
             <input 
               type="text" 
               placeholder="Họ và tên" 
-              className="border-2 border-emerald-100 p-4 rounded-xl w-full focus:border-emerald-500 focus:outline-none" 
+              className="border-2 border-emerald-100 p-4 rounded-xl w-full focus:border-emerald-500 focus:outline-none placeholder:text-emerald-800" 
               value={formData.name}
               onChange={(e) => setFormData({...formData, name: e.target.value})}
             />
@@ -62,7 +62,7 @@ export default function CheckoutPage() {
             <input 
               type="text" 
               placeholder="Số điện thoại" 
-              className="border-2 border-emerald-100 p-4 rounded-xl w-full focus:border-emerald-500 focus:outline-none" 
+              className="border-2 border-emerald-100 p-4 rounded-xl w-full focus:border-emerald-500 focus:outline-none placeholder:text-emerald-800" 
               value={formData.phone}
               onChange={(e) => setFormData({...formData, phone: e.target.value})}
             />
@@ -72,7 +72,7 @@ export default function CheckoutPage() {
             <input 
               type="text" 
               placeholder="Địa chỉ giao hàng" 
-              className="border-2 border-emerald-100 p-4 rounded-xl w-full focus:border-emerald-500 focus:outline-none" 
+              className="border-2 border-emerald-100 p-4 rounded-xl w-full focus:border-emerald-500 focus:outline-none placeholder:text-emerald-800" 
               value={formData.address}
               onChange={(e) => setFormData({...formData, address: e.target.value})}
             />
