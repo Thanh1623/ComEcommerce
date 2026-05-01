@@ -117,15 +117,19 @@ export default function Home() {
           ].map((prod) => (
             <Link href={`/products/${prod.id}`} key={prod.id}>
               <motion.div 
-                className="border-2 border-emerald-100 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition flex flex-col items-center text-center cursor-pointer h-full bg-white"
                 variants={itemVariants}
-                animate={{ y: [0, -5, 0] }}
-                transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-                whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+                className="h-full"
               >
-                {prod.icon}
-                <h3 className="text-2xl font-bold mb-2 text-emerald-900">{prod.name}</h3>
-                <p className="text-gray-600">{prod.desc}</p>
+                <motion.div 
+                  className="border-2 border-emerald-100 p-8 rounded-2xl shadow-xl transition flex flex-col items-center text-center cursor-pointer h-full bg-white"
+                  animate={{ y: [0, -15, 0] }}
+                  transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                  whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+                >
+                  {prod.icon}
+                  <h3 className="text-2xl font-bold mb-2 text-emerald-900">{prod.name}</h3>
+                  <p className="text-gray-600">{prod.desc}</p>
+                </motion.div>
               </motion.div>
             </Link>
           ))}
