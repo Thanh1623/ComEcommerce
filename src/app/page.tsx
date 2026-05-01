@@ -79,47 +79,6 @@ export default function Home() {
         </button>
       </motion.section>
 
-      {/* Story Section */}
-      <motion.section 
-        className="py-20 px-8 max-w-4xl mx-auto text-center bg-white rounded-3xl shadow-2xl border-t-4 border-emerald-600 my-16"
-        variants={sectionVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-      >
-        <h2 className="text-4xl font-extrabold mb-8 text-emerald-950">Câu chuyện Cốm Làng Vòng</h2>
-        <p className="text-xl text-emerald-800 leading-relaxed italic">
-          "Cốm Làng Vòng không chỉ là một món ăn, mà là cả một nền văn hóa, một mảnh hồn của Hà Nội cổ kính. 
-          Qua bao thăng trầm, nghề làm cốm tại Làng Vòng vẫn được gìn giữ như một báu vật, 
-          chắt lọc những hạt lúa nếp cái hoa vàng tinh túy nhất của đất trời."
-        </p>
-      </motion.section>
-
-      {/* Process Section */}
-      <motion.section 
-        className="py-20 px-6 bg-white"
-        variants={sectionVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-      >
-        <h2 className="text-4xl font-bold mb-16 text-center text-emerald-900">Quy trình làm Cốm công phu</h2>
-        <motion.div 
-          className="grid grid-cols-2 md:grid-cols-5 gap-8 max-w-6xl mx-auto text-center"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          {['Tuyển chọn', 'Ngâm lúa', 'Rang cốm', 'Giã cốm', 'Gói lá'].map((step, idx) => (
-            <motion.div key={step} variants={itemVariants}>
-              <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-800 font-bold text-xl">{idx + 1}</div>
-              <h3 className="font-semibold text-emerald-900">{step}</h3>
-            </motion.div>
-          ))}
-        </motion.div>
-      </motion.section>
-
       {/* Services Section */}
       <motion.section 
         className="py-20 px-6 max-w-6xl mx-auto"
@@ -167,6 +126,47 @@ export default function Home() {
                 <p>{prod.desc}</p>
               </motion.div>
             </Link>
+          ))}
+        </motion.div>
+      </motion.section>
+
+      {/* Story Section */}
+      <motion.section 
+        className="py-20 px-8 max-w-4xl mx-auto text-center bg-white rounded-3xl shadow-2xl border-t-4 border-emerald-600 my-16"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        <h2 className="text-4xl font-extrabold mb-8 text-emerald-950">Câu chuyện Cốm Làng Vòng</h2>
+        <p className="text-xl text-emerald-800 leading-relaxed italic">
+          "Cốm Làng Vòng không chỉ là một món ăn, mà là cả một nền văn hóa, một mảnh hồn của Hà Nội cổ kính. 
+          Qua bao thăng trầm, nghề làm cốm tại Làng Vòng vẫn được gìn giữ như một báu vật, 
+          chắt lọc những hạt lúa nếp cái hoa vàng tinh túy nhất của đất trời."
+        </p>
+      </motion.section>
+
+      {/* Process Section */}
+      <motion.section 
+        className="py-20 px-6 bg-white"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        <h2 className="text-4xl font-bold mb-16 text-center text-emerald-900">Quy trình làm Cốm công phu</h2>
+        <motion.div 
+          className="grid grid-cols-2 md:grid-cols-5 gap-8 max-w-6xl mx-auto text-center"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          {['Tuyển chọn', 'Ngâm lúa', 'Rang cốm', 'Giã cốm', 'Gói lá'].map((step, idx) => (
+            <motion.div key={step} variants={itemVariants}>
+              <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-800 font-bold text-xl">{idx + 1}</div>
+              <h3 className="font-semibold text-emerald-900">{step}</h3>
+            </motion.div>
           ))}
         </motion.div>
       </motion.section>
