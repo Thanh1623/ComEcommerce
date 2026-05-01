@@ -2,14 +2,52 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import Link from 'next/link';
 
-const sectionVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.6, ease: "easeOut" } 
-  }
+// ... (variants remain the same)
+
+export default function Home() {
+// ... (Home function setup)
+
+      {/* Services Section */}
+      <motion.section 
+        className="py-20 px-6 max-w-6xl mx-auto"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <h2 className="text-3xl font-bold mb-12 text-center text-emerald-900">Sản Phẩm Đặc Sản</h2>
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          {[
+            { id: 'com-tuoi', name: 'Cốm Tươi Làng Vòng', img: '/assets/com-tuoi.svg', desc: 'Cốm mới giã, xanh non, thơm dịu.' },
+            { id: 'banh-com', name: 'Bánh Cốm', img: '/assets/banh-com.svg', desc: 'Vỏ dẻo thơm, nhân đậu xanh bùi.' },
+            { id: 'com-kho', name: 'Cốm Khô Đặc Biệt', img: '/assets/com-kho.svg', desc: 'Lựa chọn hoàn hảo quanh năm.' }
+          ].map((prod) => (
+            <Link href={`/products/${prod.id}`} key={prod.id}>
+              <motion.div 
+                className="border border-emerald-100 p-8 rounded-lg shadow-sm hover:shadow-lg transition flex flex-col items-center text-center cursor-pointer h-full"
+                variants={itemVariants}
+                whileHover={{ y: -10 }}
+              >
+                <img src={prod.img} alt={prod.name} className="w-16 h-16 mb-4" />
+                <h3 className="text-xl font-semibold mb-2 text-emerald-800">{prod.name}</h3>
+                <p>{prod.desc}</p>
+              </motion.div>
+            </Link>
+          ))}
+        </motion.div>
+      </motion.section>
+    </main>
+  );
+}
+
 };
 
 const containerVariants = {
