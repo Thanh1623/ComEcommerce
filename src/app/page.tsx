@@ -65,16 +65,16 @@ export default function Home() {
         transition={{ duration: 1 }}
       >
         <motion.h1 
-          className="text-6xl font-bold mb-6 text-emerald-900"
+          className="text-6xl font-bold mb-6 text-emerald-800"
           initial={{ y: -50 }}
           animate={{ y: 0 }}
         >
           Cốm Làng Vòng - Tinh Hoa Ẩm Thực Hà Nội
         </motion.h1>
-        <p className="text-xl mb-10 text-emerald-800 max-w-2xl mx-auto">
+        <p className="text-xl mb-10 text-emerald-700 max-w-2xl mx-auto">
           Mang hương vị mùa thu Hà Nội vào từng sản phẩm cốm truyền thống.
         </p>
-        <button className="bg-emerald-800 text-white px-10 py-4 rounded-full text-lg hover:bg-emerald-700 transition">
+        <button className="bg-emerald-700 text-white px-10 py-4 rounded-full text-lg hover:bg-emerald-600 transition">
           Đặt Mua Ngay
         </button>
       </motion.section>
@@ -87,8 +87,8 @@ export default function Home() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
-        <h2 className="text-5xl font-extrabold mb-4 text-center text-emerald-950 tracking-tight">Sản Phẩm Đặc Sản</h2>
-        <div className="w-24 h-1 bg-emerald-500 mx-auto mb-12 rounded-full"></div>
+        <h2 className="text-5xl font-extrabold mb-4 text-center text-emerald-800 tracking-tight">Sản Phẩm Đặc Sản</h2>
+        <div className="w-24 h-1 bg-emerald-400 mx-auto mb-12 rounded-full"></div>
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
           variants={containerVariants}
@@ -100,19 +100,19 @@ export default function Home() {
             { 
               id: 'com-tuoi', 
               name: 'Cốm Tươi Làng Vòng', 
-              icon: <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 mb-4 text-emerald-500"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>,
+              icon: <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 mb-4 text-emerald-400"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>,
               desc: 'Cốm mới giã, xanh non, thơm dịu.' 
             },
             { 
               id: 'banh-com', 
               name: 'Bánh Cốm', 
-              icon: <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 mb-4 text-emerald-500"><rect width="20" height="12" x="2" y="6" rx="2"/><path d="M12 12h.01"/><path d="M17 12h.01"/><path d="M7 12h.01"/></svg>,
+              icon: <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 mb-4 text-emerald-400"><rect width="20" height="12" x="2" y="6" rx="2"/><path d="M12 12h.01"/><path d="M17 12h.01"/><path d="M7 12h.01"/></svg>,
               desc: 'Vỏ dẻo thơm, nhân đậu xanh bùi.' 
             },
             { 
               id: 'com-kho', 
               name: 'Cốm Khô Đặc Biệt', 
-              icon: <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 mb-4 text-emerald-500"><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.9 4.9 1.4 1.4"/><path d="m17.7 17.7 1.4 1.4"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.3 17.7-1.4 1.4"/><path d="m19.1 6.3-1.4-1.4"/></svg>,
+              icon: <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 mb-4 text-emerald-400"><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.9 4.9 1.4 1.4"/><path d="m17.7 17.7 1.4 1.4"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.3 17.7-1.4 1.4"/><path d="m19.1 6.3-1.4-1.4"/></svg>,
               desc: 'Lựa chọn hoàn hảo quanh năm.' 
             }
           ].map((prod) => (
@@ -122,14 +122,14 @@ export default function Home() {
                 className="h-full"
               >
                 <motion.div 
-                  className="border-2 border-emerald-100 p-8 rounded-2xl shadow-xl transition flex flex-col items-center text-center cursor-pointer h-full bg-white"
+                  className="border-2 border-emerald-50 p-8 rounded-2xl shadow-xl transition flex flex-col items-center text-center cursor-pointer h-full bg-white"
                   animate={{ y: [0, -15, 0] }}
                   transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
                   whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
                 >
                   {prod.icon}
-                  <h3 className="text-2xl font-bold mb-2 text-emerald-900">{prod.name}</h3>
-                  <p className="text-gray-600">{prod.desc}</p>
+                  <h3 className="text-2xl font-bold mb-2 text-emerald-800">{prod.name}</h3>
+                  <p className="text-emerald-700">{prod.desc}</p>
                 </motion.div>
               </motion.div>
             </Link>
@@ -139,14 +139,14 @@ export default function Home() {
 
       {/* Story Section */}
       <motion.section 
-        className="py-20 px-8 max-w-4xl mx-auto text-center bg-white rounded-3xl shadow-2xl border-t-4 border-emerald-600 my-16"
+        className="py-20 px-8 max-w-4xl mx-auto text-center bg-white rounded-3xl shadow-2xl border-t-4 border-emerald-400 my-16"
         variants={sectionVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
       >
-        <h2 className="text-4xl font-extrabold mb-8 text-emerald-950">Câu chuyện Cốm Làng Vòng</h2>
-        <p className="text-xl text-emerald-800 leading-relaxed italic">
+        <h2 className="text-4xl font-extrabold mb-8 text-emerald-800">Câu chuyện Cốm Làng Vòng</h2>
+        <p className="text-xl text-emerald-700 leading-relaxed italic">
           "Cốm Làng Vòng không chỉ là một món ăn, mà là cả một nền văn hóa, một mảnh hồn của Hà Nội cổ kính. 
           Qua bao thăng trầm, nghề làm cốm tại Làng Vòng vẫn được gìn giữ như một báu vật, 
           chắt lọc những hạt lúa nếp cái hoa vàng tinh túy nhất của đất trời."
@@ -161,7 +161,7 @@ export default function Home() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
       >
-        <h2 className="text-4xl font-bold mb-16 text-center text-emerald-900">Quy trình làm Cốm công phu</h2>
+        <h2 className="text-4xl font-bold mb-16 text-center text-emerald-800">Quy trình làm Cốm công phu</h2>
         <motion.div 
           className="grid grid-cols-2 md:grid-cols-5 gap-8 max-w-6xl mx-auto text-center"
           variants={containerVariants}
@@ -171,8 +171,8 @@ export default function Home() {
         >
           {['Tuyển chọn', 'Ngâm lúa', 'Rang cốm', 'Giã cốm', 'Gói lá'].map((step, idx) => (
             <motion.div key={step} variants={itemVariants}>
-              <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-800 font-bold text-xl">{idx + 1}</div>
-              <h3 className="font-semibold text-emerald-900">{step}</h3>
+              <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-600 font-bold text-xl">{idx + 1}</div>
+              <h3 className="font-semibold text-emerald-700">{step}</h3>
             </motion.div>
           ))}
         </motion.div>
@@ -186,7 +186,7 @@ export default function Home() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
-        <h2 className="text-3xl font-bold mb-8 text-center text-emerald-900">Liên Hệ Đặt Hàng</h2>
+        <h2 className="text-3xl font-bold mb-8 text-center text-emerald-800">Liên Hệ Đặt Hàng</h2>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div>
             <input
@@ -208,7 +208,7 @@ export default function Home() {
             />
             {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
           </div>
-          <button type="submit" className="bg-emerald-800 text-white p-3 rounded hover:bg-emerald-700">Gửi Yêu Cầu</button>
+          <button type="submit" className="bg-emerald-700 text-white p-3 rounded hover:bg-emerald-600 transition">Gửi Yêu Cầu</button>
         </form>
       </motion.section>
     </main>
