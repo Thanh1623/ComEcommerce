@@ -4,22 +4,91 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 
 const sectionVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.6, ease: "easeOut" } 
+  }
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: { 
+    opacity: 1,
+    transition: { staggerChildren: 0.2 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 }
 };
 
 export default function Home() {
-  const [formData, setFormData] = useState({ name: '', email: '' });
-  const [errors, setErrors] = useState({ name: '', email: '' });
+// ...
+      {/* Process Section */}
+      <motion.section 
+        className="py-20 px-6 bg-white"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        <h2 className="text-4xl font-bold mb-16 text-center text-emerald-900">Quy trình làm Cốm công phu</h2>
+        <motion.div 
+          className="grid grid-cols-2 md:grid-cols-5 gap-8 max-w-6xl mx-auto text-center"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          {['Tuyển chọn', 'Ngâm lúa', 'Rang cốm', 'Giã cốm', 'Gói lá'].map((step, idx) => (
+            <motion.div key={step} variants={itemVariants}>
+              <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-800 font-bold text-xl">{idx + 1}</div>
+              <h3 className="font-semibold text-emerald-900">{step}</h3>
+            </motion.div>
+          ))}
+        </motion.div>
+      </motion.section>
 
-  const validate = () => {
-    let isValid = true;
-    const newErrors = { name: '', email: '' };
+      {/* Services Section */}
+      <motion.section 
+        className="py-20 px-6 max-w-6xl mx-auto"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <h2 className="text-3xl font-bold mb-12 text-center text-emerald-900">Sản Phẩm Đặc Sản</h2>
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          {[
+            { name: 'Cốm Tươi Làng Vòng', img: '/assets/com-tuoi.svg', desc: 'Cốm mới giã, xanh non, thơm dịu.' },
+            { name: 'Bánh Cốm', img: '/assets/banh-com.svg', desc: 'Vỏ dẻo thơm, nhân đậu xanh bùi.' },
+            { name: 'Cốm Khô Đặc Biệt', img: '/assets/com-kho.svg', desc: 'Lựa chọn hoàn hảo quanh năm.' }
+          ].map((prod) => (
+            <motion.div 
+              key={prod.name}
+              className="border border-emerald-100 p-8 rounded-lg shadow-sm hover:shadow-lg transition flex flex-col items-center text-center"
+              variants={itemVariants}
+            >
+              <img src={prod.img} alt={prod.name} className="w-16 h-16 mb-4" />
+              <h3 className="text-xl font-semibold mb-2 text-emerald-800">{prod.name}</h3>
+              <p>{prod.desc}</p>
+            </motion.div>
+          ))}
+        </motion.div>
+      </motion.section>
+    </main>
+  );
+}
 
-    if (!formData.name) {
-      newErrors.name = 'Vui lòng nhập tên.';
-      isValid = false;
-    }
     if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Vui lòng nhập email hợp lệ.';
       isValid = false;
