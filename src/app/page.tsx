@@ -87,7 +87,8 @@ export default function Home() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
-        <h2 className="text-3xl font-bold mb-12 text-center text-emerald-900">Sản Phẩm Đặc Sản</h2>
+        <h2 className="text-5xl font-extrabold mb-4 text-center text-emerald-950 tracking-tight">Sản Phẩm Đặc Sản</h2>
+        <div className="w-24 h-1 bg-emerald-500 mx-auto mb-12 rounded-full"></div>
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
           variants={containerVariants}
