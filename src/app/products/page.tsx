@@ -1,5 +1,6 @@
 import { products } from '@/data/products';
 import Link from 'next/link';
+import ProductIcon from '@/components/ProductIcon';
 
 export default function ProductListing() {
   return (
@@ -9,7 +10,7 @@ export default function ProductListing() {
         {products.map((product) => (
           <Link href={`/products/${product.id}`} key={product.id}>
             <div className="border border-emerald-100 p-8 rounded-lg shadow-sm hover:shadow-md transition flex flex-col items-center text-center cursor-pointer">
-              <img src={product.image} alt={product.name} className="w-16 h-16 mb-4" />
+              <ProductIcon id={product.id} className="w-16 h-16 mb-4" />
               <h3 className="text-xl font-semibold mb-2 text-emerald-800">{product.name}</h3>
               <p className="text-gray-600 mb-4">{product.description}</p>
               <p className="text-lg font-bold text-emerald-900">{product.price.toLocaleString('vi-VN')} đ</p>

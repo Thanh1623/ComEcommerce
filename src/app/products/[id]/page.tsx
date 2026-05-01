@@ -4,6 +4,7 @@ import { products } from '@/data/products';
 import { notFound } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import { use } from 'react';
+import ProductIcon from '@/components/ProductIcon';
 
 interface ProductDetailPageProps {
   params: Promise<{ id: string }>;
@@ -21,7 +22,7 @@ export default function ProductDetail({ params }: ProductDetailPageProps) {
   return (
     <div className="py-20 px-6 max-w-4xl mx-auto">
       <div className="border border-emerald-100 p-8 rounded-lg shadow-sm">
-        <img src={product.image} alt={product.name} className="w-32 h-32 mx-auto mb-6" />
+        <ProductIcon id={product.id} className="w-32 h-32 mx-auto mb-6" />
         <h2 className="text-4xl font-bold mb-4 text-emerald-900 text-center">{product.name}</h2>
         <p className="text-gray-600 mb-6 text-lg text-center">{product.description}</p>
         <p className="text-2xl font-bold text-emerald-900 text-center">{product.price.toLocaleString('vi-VN')} đ</p>

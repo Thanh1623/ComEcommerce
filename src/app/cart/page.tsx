@@ -1,6 +1,7 @@
 'use client';
 
 import { useCart } from '@/context/CartContext';
+import ProductIcon from '@/components/ProductIcon';
 
 export default function CartPage() {
   const { cart, removeFromCart } = useCart();
@@ -17,17 +18,17 @@ export default function CartPage() {
           {cart.map((item) => (
             <div key={item.id} className="flex justify-between items-center border p-4 rounded">
               <div className="flex items-center gap-4">
-                <img src={item.image} alt={item.name} className="w-16 h-16" />
+                <ProductIcon id={item.id} className="w-16 h-16" />
                 <div>
-                  <h3 className="font-semibold">{item.name}</h3>
-                  <p>Số lượng: {item.quantity}</p>
+                  <h3 className="font-semibold text-emerald-900">{item.name}</h3>
+                  <p className="text-gray-600">Số lượng: {item.quantity}</p>
                 </div>
               </div>
-              <p className="font-bold">{(item.price * item.quantity).toLocaleString('vi-VN')} đ</p>
-              <button onClick={() => removeFromCart(item.id)} className="text-red-500">Xóa</button>
+              <p className="font-bold text-emerald-900">{(item.price * item.quantity).toLocaleString('vi-VN')} đ</p>
+              <button onClick={() => removeFromCart(item.id)} className="text-red-500 hover:text-red-700">Xóa</button>
             </div>
           ))}
-          <div className="text-right text-2xl font-bold">
+          <div className="text-right text-2xl font-bold text-emerald-950 mt-4">
             Tổng cộng: {total.toLocaleString('vi-VN')} đ
           </div>
         </div>
