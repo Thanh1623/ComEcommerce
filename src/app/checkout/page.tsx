@@ -43,14 +43,16 @@ export default function CheckoutPage() {
 
   return (
     <div className="py-20 px-6 max-w-4xl mx-auto">
-      <h2 className="text-3xl font-bold mb-12 text-center text-emerald-900">Thanh Toán</h2>
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <h2 className="text-5xl font-extrabold mb-4 text-center text-emerald-950 tracking-tight">Thanh Toán</h2>
+      <div className="w-24 h-1 bg-emerald-500 mx-auto mb-16 rounded-full"></div>
+      
+      <form onSubmit={handleSubmit} className="space-y-6 bg-white p-8 rounded-2xl shadow-xl border-2 border-emerald-100">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <input 
               type="text" 
               placeholder="Họ và tên" 
-              className="border border-gray-300 p-3 rounded w-full" 
+              className="border-2 border-emerald-100 p-4 rounded-xl w-full focus:border-emerald-500 focus:outline-none" 
               value={formData.name}
               onChange={(e) => setFormData({...formData, name: e.target.value})}
             />
@@ -60,7 +62,7 @@ export default function CheckoutPage() {
             <input 
               type="text" 
               placeholder="Số điện thoại" 
-              className="border border-gray-300 p-3 rounded w-full" 
+              className="border-2 border-emerald-100 p-4 rounded-xl w-full focus:border-emerald-500 focus:outline-none" 
               value={formData.phone}
               onChange={(e) => setFormData({...formData, phone: e.target.value})}
             />
@@ -70,7 +72,7 @@ export default function CheckoutPage() {
             <input 
               type="text" 
               placeholder="Địa chỉ giao hàng" 
-              className="border border-gray-300 p-3 rounded w-full" 
+              className="border-2 border-emerald-100 p-4 rounded-xl w-full focus:border-emerald-500 focus:outline-none" 
               value={formData.address}
               onChange={(e) => setFormData({...formData, address: e.target.value})}
             />
@@ -78,20 +80,20 @@ export default function CheckoutPage() {
           </div>
         </div>
         
-        <div className="border-t pt-6">
-          <h3 className="text-xl font-semibold mb-4">Đơn hàng của bạn</h3>
+        <div className="border-t-2 border-emerald-100 pt-6">
+          <h3 className="text-2xl font-semibold mb-4 text-emerald-900">Đơn hàng của bạn</h3>
           {cart.map((item) => (
-            <div key={item.id} className="flex justify-between py-2">
+            <div key={item.id} className="flex justify-between py-2 text-emerald-800">
               <span>{item.name} x {item.quantity}</span>
-              <span>{(item.price * item.quantity).toLocaleString('vi-VN')} đ</span>
+              <span className="font-semibold">{(item.price * item.quantity).toLocaleString('vi-VN')} đ</span>
             </div>
           ))}
-          <div className="text-right text-2xl font-bold mt-4">
+          <div className="text-right text-3xl font-bold text-emerald-950 mt-6">
             Tổng cộng: {total.toLocaleString('vi-VN')} đ
           </div>
         </div>
         
-        <button type="submit" className="bg-emerald-800 text-white p-3 rounded w-full hover:bg-emerald-700">Đặt Hàng</button>
+        <button type="submit" className="bg-emerald-700 text-white p-4 rounded-xl w-full hover:bg-emerald-600 transition font-bold text-lg">Đặt Hàng</button>
       </form>
     </div>
   );

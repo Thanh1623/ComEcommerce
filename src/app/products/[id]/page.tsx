@@ -21,15 +21,15 @@ export default function ProductDetail({ params }: ProductDetailPageProps) {
 
   return (
     <div className="py-20 px-6 max-w-4xl mx-auto">
-      <div className="border border-emerald-100 p-8 rounded-lg shadow-sm">
+      <div className="border-2 border-emerald-100 p-8 rounded-2xl shadow-xl bg-white">
         <ProductIcon id={product.id} className="w-32 h-32 mx-auto mb-6" />
-        <h2 className="text-4xl font-bold mb-4 text-emerald-900 text-center">{product.name}</h2>
-        <p className="text-gray-600 mb-6 text-lg text-center">{product.description}</p>
-        <p className="text-2xl font-bold text-emerald-900 text-center">{product.price.toLocaleString('vi-VN')} đ</p>
+        <h2 className="text-5xl font-extrabold mb-4 text-emerald-950 text-center tracking-tight">{product.name}</h2>
+        <p className="text-emerald-700 mb-6 text-lg text-center">{product.description}</p>
+        <p className="text-3xl font-bold text-emerald-950 text-center">{product.price.toLocaleString('vi-VN')} đ</p>
         <div className="text-center mt-8">
             <button 
                 onClick={() => addToCart(product)}
-                className="bg-emerald-800 text-white px-8 py-3 rounded-full hover:bg-emerald-700"
+                className="bg-emerald-700 text-white px-10 py-4 rounded-full text-lg hover:bg-emerald-600 transition"
             >
                 Thêm vào giỏ hàng
             </button>
