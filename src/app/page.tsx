@@ -136,6 +136,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
+          {[
             { 
               id: 'com-tuoi', 
               name: 'Cốm Tươi Làng Vòng', 
@@ -154,7 +155,7 @@ export default function Home() {
               icon: <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 mb-4 text-emerald-500"><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.9 4.9 1.4 1.4"/><path d="m17.7 17.7 1.4 1.4"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.3 17.7-1.4 1.4"/><path d="m19.1 6.3-1.4-1.4"/></svg>,
               desc: 'Lựa chọn hoàn hảo quanh năm.' 
             }
-.map((prod) => (
+          ].map((prod) => (
             <Link href={`/products/${prod.id}`} key={prod.id}>
               <motion.div 
                 className="border border-emerald-100 p-8 rounded-lg shadow-sm hover:shadow-lg transition flex flex-col items-center text-center cursor-pointer h-full"
