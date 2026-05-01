@@ -1,6 +1,12 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { useState } from 'react';
+
+const sectionVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+};
 
 export default function Home() {
   const [formData, setFormData] = useState({ name: '', email: '' });
@@ -32,66 +38,91 @@ export default function Home() {
   };
 
   return (
-    <main>
-      <section id="hero" className="bg-emerald-50 py-24 text-center">
-        <h1 className="text-5xl font-bold mb-4 text-emerald-900">Cốm Làng Vòng - Tinh Hoa Ẩm Thực Hà Nội</h1>
-        <p className="text-xl mb-8 text-emerald-800">Mang hương vị mùa thu Hà Nội vào từng sản phẩm cốm truyền thống.</p>
-        <button className="bg-emerald-800 text-white px-8 py-3 rounded-full hover:bg-emerald-700">Đặt Mua Ngay</button>
-      </section>
+    <main className="overflow-x-hidden">
+      {/* Hero Section */}
+      <motion.section 
+        className="bg-emerald-50 py-24 text-center px-6"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        <motion.h1 
+          className="text-6xl font-bold mb-6 text-emerald-900"
+          initial={{ y: -50 }}
+          animate={{ y: 0 }}
+        >
+          Cốm Làng Vòng - Tinh Hoa Ẩm Thực Hà Nội
+        </motion.h1>
+        <p className="text-xl mb-10 text-emerald-800 max-w-2xl mx-auto">
+          Mang hương vị mùa thu Hà Nội vào từng sản phẩm cốm truyền thống.
+        </p>
+        <button className="bg-emerald-800 text-white px-10 py-4 rounded-full text-lg hover:bg-emerald-700 transition">
+          Đặt Mua Ngay
+        </button>
+      </motion.section>
 
-      <section id="services" className="py-20 px-6 max-w-6xl mx-auto">
+      {/* Story Section */}
+      <motion.section 
+        className="py-20 px-6 max-w-4xl mx-auto text-center"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <h2 className="text-4xl font-bold mb-8 text-emerald-900">Câu chuyện Cốm Làng Vòng</h2>
+        <p className="text-lg text-gray-700 leading-relaxed">
+          Cốm Làng Vòng không chỉ là một món ăn, mà là cả một nền văn hóa, một mảnh hồn của Hà Nội cổ kính. 
+          Qua bao thăng trầm, nghề làm cốm tại Làng Vòng vẫn được gìn giữ như một báu vật, 
+          chắt lọc những hạt lúa nếp cái hoa vàng tinh túy nhất của đất trời.
+        </p>
+      </motion.section>
+
+      {/* Process Section */}
+      <motion.section 
+        className="py-20 px-6 bg-white"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <h2 className="text-4xl font-bold mb-16 text-center text-emerald-900">Quy trình làm Cốm công phu</h2>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 max-w-6xl mx-auto text-center">
+          {['Tuyển chọn', 'Ngâm lúa', 'Rang cốm', 'Giã cốm', 'Gói lá'].map((step, idx) => (
+            <motion.div key={step} whileHover={{ scale: 1.05 }}>
+              <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-800 font-bold text-xl">{idx + 1}</div>
+              <h3 className="font-semibold text-emerald-900">{step}</h3>
+            </motion.div>
+          ))}
+        </div>
+      </motion.section>
+
+      {/* Services Section */}
+      <motion.section 
+        className="py-20 px-6 max-w-6xl mx-auto"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         <h2 className="text-3xl font-bold mb-12 text-center text-emerald-900">Sản Phẩm Đặc Sản</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="border border-emerald-100 p-8 rounded-lg shadow-sm hover:shadow-md transition flex flex-col items-center text-center">
-            <img src="/assets/com-tuoi.svg" alt="Cốm Tươi Làng Vòng" className="w-12 h-12 mb-4" />
-            <h3 className="text-xl font-semibold mb-2 text-emerald-800">Cốm Tươi Làng Vòng</h3>
-            <p>Cốm mới giã, xanh non, thơm dịu, chuẩn hương vị truyền thống.</p>
-          </div>
-          <div className="border border-emerald-100 p-8 rounded-lg shadow-sm hover:shadow-md transition flex flex-col items-center text-center">
-            <img src="/assets/banh-com.svg" alt="Bánh Cốm" className="w-12 h-12 mb-4" />
-            <h3 className="text-xl font-semibold mb-2 text-emerald-800">Bánh Cốm</h3>
-            <p>Vỏ bánh dẻo thơm hòa quyện cùng nhân đậu xanh bùi ngậy.</p>
-          </div>
-          <div className="border border-emerald-100 p-8 rounded-lg shadow-sm hover:shadow-md transition flex flex-col items-center text-center">
-            <img src="/assets/com-kho.svg" alt="Cốm Khô Đặc Biệt" className="w-12 h-12 mb-4" />
-            <h3 className="text-xl font-semibold mb-2 text-emerald-800">Cốm Khô Đặc Biệt</h3>
-            <p>Lựa chọn hoàn hảo để chế biến các món ngon quanh năm.</p>
-          </div>
+          {[
+            { name: 'Cốm Tươi Làng Vòng', img: '/assets/com-tuoi.svg', desc: 'Cốm mới giã, xanh non, thơm dịu.' },
+            { name: 'Bánh Cốm', img: '/assets/banh-com.svg', desc: 'Vỏ dẻo thơm, nhân đậu xanh bùi.' },
+            { name: 'Cốm Khô Đặc Biệt', img: '/assets/com-kho.svg', desc: 'Lựa chọn hoàn hảo quanh năm.' }
+          ].map((prod) => (
+            <motion.div 
+              key={prod.name}
+              className="border border-emerald-100 p-8 rounded-lg shadow-sm hover:shadow-lg transition flex flex-col items-center text-center"
+              whileHover={{ y: -10 }}
+            >
+              <img src={prod.img} alt={prod.name} className="w-16 h-16 mb-4" />
+              <h3 className="text-xl font-semibold mb-2 text-emerald-800">{prod.name}</h3>
+              <p>{prod.desc}</p>
+            </motion.div>
+          ))}
         </div>
-      </section>
-
-      <section id="testimonials" className="bg-emerald-900 text-emerald-50 py-20 px-6 text-center">
-        <h2 className="text-3xl font-bold mb-8">Khách hàng nói gì?</h2>
-        <p className="italic text-lg">"Hương vị chuẩn Hà Nội, thơm nồng nàn, đúng chất cốm làng Vòng. Rất đáng thử!"</p>
-        <p className="mt-4 font-semibold">- Khách hàng yêu Hà Nội -</p>
-      </section>
-
-      <section id="contact" className="py-20 px-6 max-w-md mx-auto">
-        <h2 className="text-3xl font-bold mb-8 text-center text-emerald-900">Liên Hệ Đặt Hàng</h2>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <div>
-            <input
-              type="text"
-              placeholder="Họ và tên"
-              className="w-full border border-gray-300 p-3 rounded"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            />
-            {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
-          </div>
-          <div>
-            <input
-              type="email"
-              placeholder="Email"
-              className="w-full border border-gray-300 p-3 rounded"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            />
-            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
-          </div>
-          <button type="submit" className="bg-emerald-800 text-white p-3 rounded hover:bg-emerald-700">Gửi Yêu Cầu</button>
-        </form>
-      </section>
+      </motion.section>
     </main>
   );
 }

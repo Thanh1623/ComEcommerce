@@ -31,3 +31,9 @@
 - [x] Implement checkout form validation
 - [x] Build "Place Order" flow
 - [x] Create "Thank You" page
+
+## Phase 6: Homepage Redesign (Framer Motion)
+- [x] Install and setup Framer Motion
+- [x] Add "Story" and "Process" sections
+- [x] Enhance Hero section with layout/images
+- [x] Integrate scroll-triggered animations
