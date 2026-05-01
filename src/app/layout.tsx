@@ -6,7 +6,20 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Toaster } from "sonner";
 
-// ... (geistSans and geistMono config)
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Cốm Làng Vòng",
+  description: "Cốm Làng Vòng Hà Nội",
+};
 
 export default function RootLayout({
   children,
@@ -29,5 +42,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-
