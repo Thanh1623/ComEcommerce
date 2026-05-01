@@ -8,6 +8,7 @@ export default function ProductListing() {
       <h2 className="text-5xl font-extrabold mb-4 text-center text-emerald-950 tracking-tight">Danh Mục Sản Phẩm</h2>
       <div className="w-24 h-1 bg-emerald-500 mx-auto mb-16 rounded-full"></div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
         {products.map((product) => (
           <Link href={`/products/${product.id}`} key={product.id}>
             <div className="border-2 border-emerald-100 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition flex flex-col items-center text-center cursor-pointer bg-white">
