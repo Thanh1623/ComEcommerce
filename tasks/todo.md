@@ -49,3 +49,7 @@
 - [x] Define Product and Order schema
 - [x] Implement API Routes for Products
 - [x] Implement API Routes for Orders
+
+## Phase 9: Admin Dashboard
+- [x] Create Admin page
+- [x] Fetch and display orders
