@@ -43,3 +43,9 @@
 - [x] Implement dynamic SEO Metadata (for public pages)
 - [x] Add loading skeletons
 - [x] Prepare for Deployment (Vercel)
+
+## Phase 8: Backend & Database Integration
+- [x] Initialize Prisma and configure Database
+- [x] Define Product and Order schema
+- [in_progress] Implement API Routes for Products
+- [pending] Implement API Routes for Orders
