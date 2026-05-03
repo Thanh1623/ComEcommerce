@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { OrderStatus } from '@prisma/client';
 
 export async function GET() {
   try {
@@ -41,15 +42,10 @@ export async function PATCH(req: Request) {
   try {
     const { id, status } = await req.json();
     
-    // Validate status against enum
-    const validStatuses = ['PENDING', 'PROCESSING', 'COMPLETED', 'CANCELLED'];
-    if (!validStatuses.includes(status)) {
-        return NextResponse.json({ error: 'Trạng thái không hợp lệ' }, { status: 400 });
-    }
-
+    // Explicitly cast to OrderStatus enum
     const order = await prisma.order.update({
       where: { id },
-      data: { status: status as any },
+      data: { status: status as OrderStatus },
     });
     return NextResponse.json(order);
   } catch (error) {
