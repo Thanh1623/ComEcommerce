@@ -53,14 +53,14 @@ export default function OrderList({ initialOrders }: { initialOrders: Order[] })
           {orders.map((order) => (
             <tr key={order.id} className="border-t border-emerald-100">
               <td className="p-4">
-                <p className="font-semibold">{order.name}</p>
+                <p className="font-semibold text-black">{order.name}</p>
                 <p className="text-sm text-gray-500">{order.phone}</p>
               </td>
               <td className="p-4">
                 <select 
                   value={order.status} 
                   onChange={(e) => updateStatus(order.id, e.target.value)}
-                  className="border p-2 rounded"
+                  className="border p-2 rounded text-black"
                 >
                   <option value="PENDING">PENDING</option>
                   <option value="PROCESSING">PROCESSING</option>
@@ -68,7 +68,7 @@ export default function OrderList({ initialOrders }: { initialOrders: Order[] })
                   <option value="CANCELLED">CANCELLED</option>
                 </select>
               </td>
-              <td className="p-4 text-right font-bold">{order.total.toLocaleString('vi-VN')} đ</td>
+              <td className="p-4 text-right font-bold text-black">{order.total.toLocaleString('vi-VN')} đ</td>
               <td className="p-4 text-center">
                 <button onClick={() => deleteOrder(order.id)} className="text-red-500 hover:text-red-700 font-semibold">Xóa</button>
               </td>
