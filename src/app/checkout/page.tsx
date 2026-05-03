@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useCart } from '@/context/CartContext';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 export default function CheckoutPage() {
   const { cart, clearCart } = useCart();
@@ -33,11 +34,30 @@ export default function CheckoutPage() {
     return isValid;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validate()) {
-      clearCart();
-      router.push('/thank-you');
+    if (!validate()) return;
+
+    try {
+      const response = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          total
+        }),
+      });
+
+      if (response.ok) {
+        clearCart();
+        toast.success('Đơn hàng đã được đặt thành công!');
+        router.push('/thank-you');
+      } else {
+        toast.error('Có lỗi xảy ra khi đặt hàng.');
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error('Có lỗi xảy ra khi đặt hàng.');
     }
   };
 
@@ -98,4 +118,3 @@ export default function CheckoutPage() {
     </div>
   );
 }
-
