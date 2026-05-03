@@ -16,26 +16,37 @@ export default function OrderList({ initialOrders }: { initialOrders: Order[] })
   const [orders, setOrders] = useState<Order[]>(initialOrders);
 
   const updateStatus = async (id: string, status: string) => {
-    await fetch('/api/orders', {
+    const res = await fetch('/api/orders', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id, status }),
     });
-    toast.success('Đã cập nhật trạng thái đơn hàng!');
-    const res = await fetch('/api/orders');
-    setOrders(await res.json());
+    
+    if (res.ok) {
+        toast.success('Đã cập nhật trạng thái đơn hàng!');
+        const updated = await fetch('/api/orders');
+        setOrders(await updated.json());
+    } else {
+        const error = await res.json();
+        toast.error(`Lỗi: ${error.error}`);
+    }
   };
 
   const deleteOrder = async (id: string) => {
     if (!confirm('Bạn có chắc chắn muốn xóa đơn hàng này?')) return;
-    await fetch('/api/orders', {
+    const res = await fetch('/api/orders', {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id }),
     });
-    toast.success('Đã xóa đơn hàng!');
-    const res = await fetch('/api/orders');
-    setOrders(await res.json());
+    
+    if (res.ok) {
+        toast.success('Đã xóa đơn hàng!');
+        const updated = await fetch('/api/orders');
+        setOrders(await updated.json());
+    } else {
+        toast.error('Có lỗi xảy ra khi xóa đơn hàng.');
+    }
   };
 
   return (
