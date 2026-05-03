@@ -47,5 +47,5 @@
 ## Phase 8: Backend & Database Integration
 - [x] Initialize Prisma and configure Database
 - [x] Define Product and Order schema
-- [in_progress] Implement API Routes for Products
-- [pending] Implement API Routes for Orders
+- [x] Implement API Routes for Products
+- [in_progress] Implement API Routes for Orders
