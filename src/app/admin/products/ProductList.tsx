@@ -138,8 +138,8 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
         </div>
         
         <div className="flex gap-4">
-            <button type="submit" className="bg-emerald-700 text-white p-3 rounded hover:bg-emerald-600 transition flex-grow font-bold">{editing ? 'Cập nhật' : 'Thêm'}</button>
-            {editing && <button type="button" onClick={resetForm} className="bg-gray-300 text-gray-800 p-3 rounded hover:bg-gray-400 transition font-bold">Hủy</button>}
+            <button type="submit" className="bg-emerald-700 text-white p-3 rounded hover:bg-emerald-600 transition flex-grow font-bold cursor-pointer">{editing ? 'Cập nhật' : 'Thêm'}</button>
+            {editing && <button type="button" onClick={resetForm} className="bg-gray-300 text-gray-800 p-3 rounded hover:bg-gray-400 transition font-bold cursor-pointer">Hủy</button>}
         </div>
       </form>
 
@@ -160,8 +160,8 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
                 <td className="p-4 text-black font-semibold">{product.name}</td>
                 <td className="p-4 text-black">{product.price.toLocaleString('vi-VN')} đ</td>
                 <td className="p-4 text-center space-x-2">
-                  <button onClick={() => { setEditing(product); setFormData({ name: product.name, description: product.description, price: product.price, image: product.image }); setPreviewUrl(product.image); }} className="text-blue-500 font-semibold">Sửa</button>
-                  <button onClick={() => deleteProduct(product.id)} className="text-red-500 font-semibold">Xóa</button>
+                  <button onClick={() => { setEditing(product); setFormData({ name: product.name, description: product.description, price: product.price, image: product.image }); setPreviewUrl(product.image); }} className="text-blue-500 font-semibold cursor-pointer">Sửa</button>
+                  <button onClick={() => deleteProduct(product.id)} className="text-red-500 font-semibold cursor-pointer">Xóa</button>
                 </td>
               </tr>
             ))}
