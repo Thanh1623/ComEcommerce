@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { supabase } from '@/lib/supabase';
 
 interface Product {
   id: string;
@@ -15,36 +16,44 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
   const [products, setProducts] = useState<Product[]>(initialProducts);
   const [editing, setEditing] = useState<Product | null>(null);
   const [formData, setFormData] = useState({ name: '', description: '', price: 0, image: '' });
+  const [file, setFile] = useState<File | null>(null);
 
   const fetchProducts = async () => {
     const res = await fetch('/api/products');
     setProducts(await res.json());
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData({ ...formData, image: reader.result as string });
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    let imageUrl = formData.image;
+
+    if (file) {
+      const fileName = `${Date.now()}_${file.name}`;
+      const { data, error } = await supabase.storage
+        .from('products')
+        .upload(fileName, file);
+
+      if (error) {
+        toast.error('Lỗi khi tải ảnh lên Supabase!');
+        return;
+      }
+      const { data: publicUrlData } = supabase.storage.from('products').getPublicUrl(fileName);
+      imageUrl = publicUrlData.publicUrl;
+    }
+
     const method = editing ? 'PATCH' : 'POST';
-    const body = editing ? { id: editing.id, ...formData } : formData;
+    const body = editing ? { id: editing.id, ...formData, image: imageUrl } : { ...formData, image: imageUrl };
 
     await fetch('/api/products', {
       method,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     });
+    
     toast.success(editing ? 'Đã cập nhật sản phẩm!' : 'Đã thêm sản phẩm!');
     setEditing(null);
     setFormData({ name: '', description: '', price: 0, image: '' });
+    setFile(null);
     fetchProducts();
   };
 
@@ -68,9 +77,8 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
         <input type="number" placeholder="Giá" className="border p-3 rounded w-full placeholder:text-emerald-900 text-emerald-950" value={formData.price} onChange={e => setFormData({...formData, price: parseInt(e.target.value)})} required />
         <div className="border p-3 rounded w-full">
             <label className="text-emerald-900 font-semibold block mb-2">Chọn hình ảnh sản phẩm:</label>
-            <input type="file" accept="image/*" onChange={handleFileChange} className="w-full" />
+            <input type="file" accept="image/*" onChange={(e) => setFile(e.target.files?.[0] || null)} className="w-full" />
         </div>
-        {formData.image && <img src={formData.image} alt="Preview" className="w-20 h-20 object-cover mt-2" />}
         <button type="submit" className="bg-emerald-700 text-white p-3 rounded hover:bg-emerald-600 transition w-full font-bold">{editing ? 'Cập nhật' : 'Thêm'}</button>
       </form>
 
