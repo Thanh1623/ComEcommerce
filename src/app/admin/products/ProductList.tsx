@@ -18,10 +18,32 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
   const [formData, setFormData] = useState({ name: '', description: '', price: 0, image: '' });
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string>('');
+  const [errors, setErrors] = useState({ name: '', description: '', price: '', image: '' });
 
   const fetchProducts = async () => {
     const res = await fetch('/api/products');
     setProducts(await res.json());
+  };
+
+  const resetForm = () => {
+    setFormData({ name: '', description: '', price: 0, image: '' });
+    setFile(null);
+    setPreviewUrl('');
+    setEditing(null);
+    setErrors({ name: '', description: '', price: '', image: '' });
+  };
+
+  const validate = () => {
+    let isValid = true;
+    const newErrors = { name: '', description: '', price: '', image: '' };
+
+    if (!formData.name) { newErrors.name = 'Vui lòng nhập tên sản phẩm.'; isValid = false; }
+    if (!formData.description) { newErrors.description = 'Vui lòng nhập mô tả.'; isValid = false; }
+    if (formData.price <= 0) { newErrors.price = 'Giá phải lớn hơn 0.'; isValid = false; }
+    if (!formData.image && !file) { newErrors.image = 'Vui lòng chọn hình ảnh.'; isValid = false; }
+
+    setErrors(newErrors);
+    return isValid;
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,6 +60,8 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validate()) return;
+
     let imageUrl = formData.image;
 
     if (file) {
@@ -64,10 +88,7 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
     });
     
     toast.success(editing ? 'Đã cập nhật sản phẩm!' : 'Đã thêm sản phẩm!');
-    setEditing(null);
-    setFormData({ name: '', description: '', price: 0, image: '' });
-    setFile(null);
-    setPreviewUrl('');
+    resetForm();
     fetchProducts();
   };
 
@@ -86,10 +107,22 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
     <div className="space-y-10">
       <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl shadow-xl border-2 border-emerald-100 space-y-4">
         <h3 className="text-2xl font-bold text-emerald-900">{editing ? 'Chỉnh sửa sản phẩm' : 'Thêm sản phẩm mới'}</h3>
-        <input type="text" placeholder="Tên" className="border p-3 rounded w-full placeholder:text-emerald-900 text-emerald-950" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} required />
-        <input type="text" placeholder="Mô tả" className="border p-3 rounded w-full placeholder:text-emerald-900 text-emerald-950" value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} required />
-        <input type="number" placeholder="Giá" className="border p-3 rounded w-full placeholder:text-emerald-900 text-emerald-950" value={formData.price || ''} onChange={e => setFormData({...formData, price: parseInt(e.target.value) || 0})} required />
         
+        <div>
+          <input type="text" placeholder="Tên sản phẩm" className="border p-3 rounded w-full placeholder:text-emerald-900 text-emerald-950" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
+          {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+        </div>
+        
+        <div>
+          <input type="text" placeholder="Mô tả" className="border p-3 rounded w-full placeholder:text-emerald-900 text-emerald-950" value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} />
+          {errors.description && <p className="text-red-500 text-sm mt-1">{errors.description}</p>}
+        </div>
+        
+        <div>
+          <input type="number" placeholder="Giá" className="border p-3 rounded w-full placeholder:text-emerald-900 text-emerald-950" value={formData.price || ''} onChange={e => setFormData({...formData, price: parseInt(e.target.value) || 0})} />
+          {errors.price && <p className="text-red-500 text-sm mt-1">{errors.price}</p>}
+        </div>
+
         <div className="flex flex-col items-center justify-center w-full">
             <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-emerald-300 border-dashed rounded-lg cursor-pointer bg-emerald-50 hover:bg-emerald-100">
                 <div className="flex flex-col items-center justify-center pt-5 pb-6">
@@ -97,12 +130,16 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
                 </div>
                 <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
             </label>
+            {errors.image && <p className="text-red-500 text-sm mt-1">{errors.image}</p>}
             {(previewUrl || formData.image) && (
                 <img src={previewUrl || formData.image} alt="Preview" className="mt-4 w-32 h-32 object-cover rounded-lg border-2 border-emerald-200" />
             )}
         </div>
         
-        <button type="submit" className="bg-emerald-700 text-white p-3 rounded hover:bg-emerald-600 transition w-full font-bold">{editing ? 'Cập nhật' : 'Thêm'}</button>
+        <div className="flex gap-4">
+            <button type="submit" className="bg-emerald-700 text-white p-3 rounded hover:bg-emerald-600 transition flex-grow font-bold">{editing ? 'Cập nhật' : 'Thêm'}</button>
+            {editing && <button type="button" onClick={resetForm} className="bg-gray-300 text-gray-800 p-3 rounded hover:bg-gray-400 transition font-bold">Hủy</button>}
+        </div>
       </form>
 
       <div className="overflow-x-auto shadow-xl rounded-2xl border-2 border-emerald-100 bg-white">
