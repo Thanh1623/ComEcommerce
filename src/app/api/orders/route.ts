@@ -29,7 +29,7 @@ export async function POST(req: Request) {
         phone,
         address,
         total,
-        items: items, 
+        items: JSON.parse(JSON.stringify(items)),
       },
     });
 
