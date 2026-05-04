@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { toast } from 'sonner';
 import { supabase } from '@/lib/supabase';
 
@@ -19,6 +19,7 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string>('');
   const [errors, setErrors] = useState({ name: '', description: '', price: '', image: '' });
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const fetchProducts = async () => {
     const res = await fetch('/api/products');
@@ -31,6 +32,9 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
     setPreviewUrl('');
     setEditing(null);
     setErrors({ name: '', description: '', price: '', image: '' });
+    if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+    }
   };
 
   const validate = () => {
@@ -129,7 +133,7 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
                 <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <p className="mb-2 text-sm text-emerald-900 font-semibold">Nhấn để tải ảnh sản phẩm</p>
                 </div>
-                <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
+                <input type="file" ref={fileInputRef} accept="image/*" onChange={handleFileChange} className="hidden" />
             </label>
             {errors.image && <p className="text-red-500 text-sm mt-1">{errors.image}</p>}
             {(previewUrl || formData.image) && (
@@ -159,7 +163,7 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
                 <td className="p-4"><img src={product.image} alt={product.name} className="w-12 h-12 object-cover rounded" /></td>
                 <td className="p-4 text-black font-semibold">{product.name}</td>
                 <td className="p-4 text-black">{product.price.toLocaleString('vi-VN')} đ</td>
-                <td className="p-4 text-center space-x-3">
+                <td className="p-4 text-center space-x-2">
                   <button onClick={() => { setEditing(product); setFormData({ name: product.name, description: product.description, price: product.price, image: product.image }); setPreviewUrl(product.image); }} className="px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition font-medium cursor-pointer">Sửa</button>
                   <button onClick={() => deleteProduct(product.id)} className="px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition font-medium cursor-pointer">Xóa</button>
                 </td>
