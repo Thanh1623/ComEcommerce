@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { Resend } from 'resend';
 import { OrderStatus } from '@prisma/client';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function GET() {
   try {
@@ -22,15 +25,32 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Thiếu thông tin bắt buộc' }, { status: 400 });
     }
 
-    console.log('Received Order Data:', { name, phone, address, total, items });
     const order = await prisma.order.create({
       data: {
         name,
         phone,
         address,
         total,
-        items: JSON.parse(JSON.stringify(items)),
+        items,
       },
+    });
+
+    // Send email notification
+    await resend.emails.send({
+      from: 'onboarding@resend.dev',
+      to: 'nguyenduythanh1623@gmail.com',
+      subject: `Đơn hàng mới từ ${name}`,
+      html: `
+        <h1>Đơn hàng mới!</h1>
+        <p><strong>Khách hàng:</strong> ${name}</p>
+        <p><strong>Điện thoại:</strong> ${phone}</p>
+        <p><strong>Địa chỉ:</strong> ${address}</p>
+        <h3>Sản phẩm:</h3>
+        <ul>
+          ${items.map((i: any) => `<li>${i.name} x ${i.quantity}</li>`).join('')}
+        </ul>
+        <p><strong>Tổng tiền:</strong> ${total.toLocaleString('vi-VN')} đ</p>
+      `,
     });
 
     return NextResponse.json(order, { status: 201 });

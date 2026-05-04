@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
+import { supabase } from '@/lib/supabase';
 
 interface CartItem {
   name: string;
@@ -21,13 +22,25 @@ interface Order {
 export default function OrderList({ initialOrders }: { initialOrders: Order[] }) {
   const [orders, setOrders] = useState<Order[]>(initialOrders);
 
-  const getStatusStyle = (status: string) => {
-    switch (status) {
-      case 'PENDING': return 'bg-amber-100 text-amber-800';
-      case 'PROCESSING': return 'bg-blue-100 text-blue-800';
-      case 'COMPLETED': return 'bg-emerald-100 text-emerald-800';
-      case 'CANCELLED': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-gray-800';
+  useEffect(() => {
+    // Subscribe to changes in the "Order" table
+    const channel = supabase
+      .channel('public:Order')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'Order' }, (payload) => {
+        console.log('Change received!', payload);
+        fetchOrders(); // Re-fetch orders on any change
+      })
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
+  const fetchOrders = async () => {
+    const res = await fetch('/api/orders');
+    if (res.ok) {
+        setOrders(await res.json());
     }
   };
 
@@ -40,8 +53,6 @@ export default function OrderList({ initialOrders }: { initialOrders: Order[] })
     
     if (res.ok) {
         toast.success('Đã cập nhật trạng thái đơn hàng!');
-        const updated = await fetch('/api/orders');
-        setOrders(await updated.json());
     } else {
         const error = await res.json();
         toast.error(`Lỗi: ${error.error}`);
@@ -58,8 +69,6 @@ export default function OrderList({ initialOrders }: { initialOrders: Order[] })
     
     if (res.ok) {
         toast.success('Đã xóa đơn hàng!');
-        const updated = await fetch('/api/orders');
-        setOrders(await updated.json());
     } else {
         toast.error('Có lỗi xảy ra khi xóa đơn hàng.');
     }
@@ -92,7 +101,12 @@ export default function OrderList({ initialOrders }: { initialOrders: Order[] })
                 <select 
                   value={order.status} 
                   onChange={(e) => updateStatus(order.id, e.target.value)}
-                  className={`${getStatusStyle(order.status)} p-2 rounded-lg font-medium cursor-pointer`}
+                  className={`p-2 rounded-lg font-medium cursor-pointer border text-black ${
+                    order.status === 'PENDING' ? 'bg-amber-100 text-amber-800' :
+                    order.status === 'PROCESSING' ? 'bg-blue-100 text-blue-800' :
+                    order.status === 'COMPLETED' ? 'bg-emerald-100 text-emerald-800' :
+                    'bg-red-100 text-red-800'
+                  }`}
                 >
                   <option value="PENDING">PENDING</option>
                   <option value="PROCESSING">PROCESSING</option>
