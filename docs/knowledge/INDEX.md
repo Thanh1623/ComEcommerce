@@ -19,6 +19,7 @@
 <!-- AI tự thêm entries ở đây khi tạo knowledge file mới -->
 <!-- Format: - [Title](./filename.md) — Status — 1-line summary -->
 - [Local Development Workflow](./2026-04-30-local-dev-workflow.md) — 📝 Draft — How to run the dev server in the background persistently.
+- [Prisma Schema Sync Pattern](./2026-05-04-prisma-schema-sync-pattern.md) — 📝 Draft — How to regenerate Prisma Client after schema changes.
 
 ---
 
