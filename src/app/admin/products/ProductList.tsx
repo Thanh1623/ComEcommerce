@@ -52,10 +52,10 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
     <div className="space-y-10">
       <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl shadow-xl border-2 border-emerald-100 space-y-4">
         <h3 className="text-2xl font-bold text-emerald-900">{editing ? 'Chỉnh sửa sản phẩm' : 'Thêm sản phẩm mới'}</h3>
-        <input type="text" placeholder="Tên" className="border p-3 rounded w-full" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} required />
-        <input type="text" placeholder="Mô tả" className="border p-3 rounded w-full" value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} required />
-        <input type="number" placeholder="Giá" className="border p-3 rounded w-full" value={formData.price} onChange={e => setFormData({...formData, price: parseInt(e.target.value)})} required />
-        <input type="text" placeholder="Hình ảnh URL" className="border p-3 rounded w-full" value={formData.image} onChange={e => setFormData({...formData, image: e.target.value})} required />
+        <input type="text" placeholder="Tên" className="border p-3 rounded w-full placeholder:text-emerald-900 text-emerald-950" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} required />
+        <input type="text" placeholder="Mô tả" className="border p-3 rounded w-full placeholder:text-emerald-900 text-emerald-950" value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} required />
+        <input type="number" placeholder="Giá" className="border p-3 rounded w-full placeholder:text-emerald-900 text-emerald-950" value={formData.price} onChange={e => setFormData({...formData, price: parseInt(e.target.value)})} required />
+        <input type="text" placeholder="Hình ảnh URL" className="border p-3 rounded w-full placeholder:text-emerald-900 text-emerald-950" value={formData.image} onChange={e => setFormData({...formData, image: e.target.value})} required />
         <button type="submit" className="bg-emerald-700 text-white p-3 rounded hover:bg-emerald-600 transition w-full font-bold">{editing ? 'Cập nhật' : 'Thêm'}</button>
       </form>
 
