@@ -29,7 +29,7 @@ export async function POST(req: Request) {
         phone,
         address,
         total,
-        items: JSON.stringify(items), // Send as JSON string to be safe
+        items: items, 
       },
     });
 
