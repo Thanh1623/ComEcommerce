@@ -16,9 +16,9 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, phone, address, total } = body;
+    const { name, phone, address, total, items } = body;
 
-    if (!name || !phone || !address || total === undefined) {
+    if (!name || !phone || !address || total === undefined || !items) {
       return NextResponse.json({ error: 'Thiếu thông tin bắt buộc' }, { status: 400 });
     }
 
@@ -28,6 +28,7 @@ export async function POST(req: Request) {
         phone,
         address,
         total,
+        items,
       },
     });
 

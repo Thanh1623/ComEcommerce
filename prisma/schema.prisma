@@ -30,6 +30,7 @@ model Order {
   phone     String
   address   String
   total     Int
+  items     Json        @default("[]")
   status    OrderStatus @default(PENDING)
   createdAt DateTime    @default(now())
   updatedAt DateTime    @default(now())

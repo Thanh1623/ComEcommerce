@@ -3,6 +3,11 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
 
+interface CartItem {
+  name: string;
+  quantity: number;
+}
+
 interface Order {
   id: string;
   name: string;
@@ -10,6 +15,7 @@ interface Order {
   address: string;
   total: number;
   status: 'PENDING' | 'PROCESSING' | 'COMPLETED' | 'CANCELLED';
+  items: CartItem[];
 }
 
 export default function OrderList({ initialOrders }: { initialOrders: Order[] }) {
@@ -54,7 +60,7 @@ export default function OrderList({ initialOrders }: { initialOrders: Order[] })
       <table className="w-full text-left">
         <thead className="bg-emerald-50 text-emerald-800">
           <tr>
-            <th className="p-4">Khách hàng</th>
+            <th className="p-4">Khách hàng & Đơn hàng</th>
             <th className="p-4">Trạng thái</th>
             <th className="p-4 text-right">Tổng tiền</th>
             <th className="p-4 text-center">Hành động</th>
@@ -66,6 +72,11 @@ export default function OrderList({ initialOrders }: { initialOrders: Order[] })
               <td className="p-4">
                 <p className="font-semibold text-black">{order.name}</p>
                 <p className="text-sm text-gray-500">{order.phone}</p>
+                <div className="text-xs text-emerald-700 mt-2 bg-emerald-50 p-2 rounded">
+                    {Array.isArray(order.items) && order.items.map((item: any, i: number) => (
+                        <p key={i}>{item.name} x{item.quantity}</p>
+                    ))}
+                </div>
               </td>
               <td className="p-4">
                 <select 
