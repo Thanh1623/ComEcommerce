@@ -55,6 +55,7 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
         setPreviewUrl(reader.result as string);
       };
       reader.readAsDataURL(file);
+      setErrors({...errors, image: ''});
     }
   };
 
@@ -109,17 +110,17 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
         <h3 className="text-2xl font-bold text-emerald-900">{editing ? 'Chỉnh sửa sản phẩm' : 'Thêm sản phẩm mới'}</h3>
         
         <div>
-          <input type="text" placeholder="Tên sản phẩm" className="border p-3 rounded w-full placeholder:text-emerald-900 text-emerald-950" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
+          <input type="text" placeholder="Tên sản phẩm" className="border p-3 rounded w-full placeholder:text-emerald-900 text-emerald-950" value={formData.name} onChange={e => { setFormData({...formData, name: e.target.value}); setErrors({...errors, name: ''}) }} />
           {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
         </div>
         
         <div>
-          <input type="text" placeholder="Mô tả" className="border p-3 rounded w-full placeholder:text-emerald-900 text-emerald-950" value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} />
+          <input type="text" placeholder="Mô tả" className="border p-3 rounded w-full placeholder:text-emerald-900 text-emerald-950" value={formData.description} onChange={e => { setFormData({...formData, description: e.target.value}); setErrors({...errors, description: ''}) }} />
           {errors.description && <p className="text-red-500 text-sm mt-1">{errors.description}</p>}
         </div>
         
         <div>
-          <input type="number" placeholder="Giá" className="border p-3 rounded w-full placeholder:text-emerald-900 text-emerald-950" value={formData.price || ''} onChange={e => setFormData({...formData, price: parseInt(e.target.value) || 0})} />
+          <input type="number" placeholder="Giá" className="border p-3 rounded w-full placeholder:text-emerald-900 text-emerald-950" value={formData.price || ''} onChange={e => { setFormData({...formData, price: parseInt(e.target.value) || 0}); setErrors({...errors, price: ''}) }} />
           {errors.price && <p className="text-red-500 text-sm mt-1">{errors.price}</p>}
         </div>
 
