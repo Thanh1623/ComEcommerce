@@ -20,7 +20,7 @@ export default function CartPage() {
           {cart.map((item) => (
             <div key={item.id} className="flex justify-between items-center border-2 border-emerald-100 p-6 rounded-2xl bg-white shadow-sm">
               <div className="flex items-center gap-4">
-                <ProductIcon id={item.id} className="w-16 h-16" />
+                <ProductIcon id={item.id} name={item.name} className="w-16 h-16" />
                 <div>
                   <h3 className="font-bold text-emerald-800 text-lg">{item.name}</h3>
                   <p className="text-emerald-600">Số lượng: {item.quantity}</p>
