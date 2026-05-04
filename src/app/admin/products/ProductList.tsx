@@ -17,10 +17,23 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
   const [editing, setEditing] = useState<Product | null>(null);
   const [formData, setFormData] = useState({ name: '', description: '', price: 0, image: '' });
   const [file, setFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string>('');
 
   const fetchProducts = async () => {
     const res = await fetch('/api/products');
     setProducts(await res.json());
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewUrl(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -29,7 +42,7 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
 
     if (file) {
       const fileName = `${Date.now()}_${file.name}`;
-      const { data, error } = await supabase.storage
+      const { error } = await supabase.storage
         .from('products')
         .upload(fileName, file);
 
@@ -37,8 +50,8 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
         toast.error('Lỗi khi tải ảnh lên Supabase!');
         return;
       }
-      const { data: publicUrlData } = supabase.storage.from('products').getPublicUrl(fileName);
-      imageUrl = publicUrlData.publicUrl;
+      const { data } = supabase.storage.from('products').getPublicUrl(fileName);
+      imageUrl = data.publicUrl;
     }
 
     const method = editing ? 'PATCH' : 'POST';
@@ -54,6 +67,7 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
     setEditing(null);
     setFormData({ name: '', description: '', price: 0, image: '' });
     setFile(null);
+    setPreviewUrl('');
     fetchProducts();
   };
 
@@ -75,10 +89,19 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
         <input type="text" placeholder="Tên" className="border p-3 rounded w-full placeholder:text-emerald-900 text-emerald-950" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} required />
         <input type="text" placeholder="Mô tả" className="border p-3 rounded w-full placeholder:text-emerald-900 text-emerald-950" value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} required />
         <input type="number" placeholder="Giá" className="border p-3 rounded w-full placeholder:text-emerald-900 text-emerald-950" value={formData.price || ''} onChange={e => setFormData({...formData, price: parseInt(e.target.value) || 0})} required />
-        <div className="border p-3 rounded w-full">
-            <label className="text-emerald-900 font-semibold block mb-2">Chọn hình ảnh sản phẩm:</label>
-            <input type="file" accept="image/*" onChange={(e) => setFile(e.target.files?.[0] || null)} className="w-full" />
+        
+        <div className="flex flex-col items-center justify-center w-full">
+            <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-emerald-300 border-dashed rounded-lg cursor-pointer bg-emerald-50 hover:bg-emerald-100">
+                <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                    <p className="mb-2 text-sm text-emerald-900 font-semibold">Nhấn để tải ảnh sản phẩm</p>
+                </div>
+                <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
+            </label>
+            {(previewUrl || formData.image) && (
+                <img src={previewUrl || formData.image} alt="Preview" className="mt-4 w-32 h-32 object-cover rounded-lg border-2 border-emerald-200" />
+            )}
         </div>
+        
         <button type="submit" className="bg-emerald-700 text-white p-3 rounded hover:bg-emerald-600 transition w-full font-bold">{editing ? 'Cập nhật' : 'Thêm'}</button>
       </form>
 
@@ -95,11 +118,11 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
           <tbody>
             {products.map((product) => (
               <tr key={product.id} className="border-t border-emerald-100">
-                <td className="p-4"><img src={product.image} alt={product.name} className="w-12 h-12 object-cover" /></td>
+                <td className="p-4"><img src={product.image} alt={product.name} className="w-12 h-12 object-cover rounded" /></td>
                 <td className="p-4 text-black font-semibold">{product.name}</td>
                 <td className="p-4 text-black">{product.price.toLocaleString('vi-VN')} đ</td>
                 <td className="p-4 text-center space-x-2">
-                  <button onClick={() => { setEditing(product); setFormData({ name: product.name, description: product.description, price: product.price, image: product.image }) }} className="text-blue-500 font-semibold">Sửa</button>
+                  <button onClick={() => { setEditing(product); setFormData({ name: product.name, description: product.description, price: product.price, image: product.image }); setPreviewUrl(product.image); }} className="text-blue-500 font-semibold">Sửa</button>
                   <button onClick={() => deleteProduct(product.id)} className="text-red-500 font-semibold">Xóa</button>
                 </td>
               </tr>
