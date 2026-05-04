@@ -74,7 +74,7 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
         <h3 className="text-2xl font-bold text-emerald-900">{editing ? 'Chỉnh sửa sản phẩm' : 'Thêm sản phẩm mới'}</h3>
         <input type="text" placeholder="Tên" className="border p-3 rounded w-full placeholder:text-emerald-900 text-emerald-950" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} required />
         <input type="text" placeholder="Mô tả" className="border p-3 rounded w-full placeholder:text-emerald-900 text-emerald-950" value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} required />
-        <input type="number" placeholder="Giá" className="border p-3 rounded w-full placeholder:text-emerald-900 text-emerald-950" value={formData.price} onChange={e => setFormData({...formData, price: parseInt(e.target.value)})} required />
+        <input type="number" placeholder="Giá" className="border p-3 rounded w-full placeholder:text-emerald-900 text-emerald-950" value={formData.price || ''} onChange={e => setFormData({...formData, price: parseInt(e.target.value) || 0})} required />
         <div className="border p-3 rounded w-full">
             <label className="text-emerald-900 font-semibold block mb-2">Chọn hình ảnh sản phẩm:</label>
             <input type="file" accept="image/*" onChange={(e) => setFile(e.target.files?.[0] || null)} className="w-full" />
