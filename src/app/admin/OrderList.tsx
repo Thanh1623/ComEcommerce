@@ -21,6 +21,16 @@ interface Order {
 export default function OrderList({ initialOrders }: { initialOrders: Order[] }) {
   const [orders, setOrders] = useState<Order[]>(initialOrders);
 
+  const getStatusStyle = (status: string) => {
+    switch (status) {
+      case 'PENDING': return 'bg-amber-100 text-amber-800';
+      case 'PROCESSING': return 'bg-blue-100 text-blue-800';
+      case 'COMPLETED': return 'bg-emerald-100 text-emerald-800';
+      case 'CANCELLED': return 'bg-red-100 text-red-800';
+      default: return 'bg-gray-100 text-gray-800';
+    }
+  };
+
   const updateStatus = async (id: string, status: string) => {
     const res = await fetch('/api/orders', {
       method: 'PATCH',
@@ -56,20 +66,20 @@ export default function OrderList({ initialOrders }: { initialOrders: Order[] })
   };
 
   return (
-    <div className="overflow-x-auto shadow-xl rounded-2xl border-2 border-emerald-100 bg-white">
-      <table className="w-full text-left">
+    <div className="overflow-x-auto">
+      <table className="w-full text-left border-separate border-spacing-y-4">
         <thead className="bg-emerald-50 text-emerald-800">
           <tr>
-            <th className="p-4">Khách hàng & Đơn hàng</th>
+            <th className="p-4 rounded-tl-lg">Khách hàng & Đơn hàng</th>
             <th className="p-4">Trạng thái</th>
             <th className="p-4 text-right">Tổng tiền</th>
-            <th className="p-4 text-center">Hành động</th>
+            <th className="p-4 text-center rounded-tr-lg">Hành động</th>
           </tr>
         </thead>
         <tbody>
           {orders.map((order) => (
-            <tr key={order.id} className="border-t border-emerald-100">
-              <td className="p-4">
+            <tr key={order.id} className="bg-white shadow-sm hover:shadow-md transition">
+              <td className="p-4 rounded-l-lg">
                 <p className="font-semibold text-black">{order.name}</p>
                 <p className="text-sm text-gray-500">{order.phone}</p>
                 <div className="text-xs text-emerald-700 mt-2 bg-emerald-50 p-2 rounded">
@@ -82,7 +92,7 @@ export default function OrderList({ initialOrders }: { initialOrders: Order[] })
                 <select 
                   value={order.status} 
                   onChange={(e) => updateStatus(order.id, e.target.value)}
-                  className="border p-2 rounded text-black"
+                  className={`${getStatusStyle(order.status)} p-2 rounded-lg font-medium cursor-pointer`}
                 >
                   <option value="PENDING">PENDING</option>
                   <option value="PROCESSING">PROCESSING</option>
@@ -91,8 +101,8 @@ export default function OrderList({ initialOrders }: { initialOrders: Order[] })
                 </select>
               </td>
               <td className="p-4 text-right font-bold text-black">{order.total.toLocaleString('vi-VN')} đ</td>
-              <td className="p-4 text-center">
-                <button onClick={() => deleteOrder(order.id)} className="text-red-500 hover:text-red-700 font-semibold">Xóa</button>
+              <td className="p-4 text-center rounded-r-lg">
+                <button onClick={() => deleteOrder(order.id)} className="px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition font-medium cursor-pointer">Xóa</button>
               </td>
             </tr>
           ))}
