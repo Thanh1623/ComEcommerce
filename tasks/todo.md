@@ -55,3 +55,4 @@
 - [x] Create Admin Layout (Sidebar/Nav)
 - [x] Migrate existing Admin pages
 - [x] Create statistics dashboard with charts
+- [x] Set statistics dashboard as admin default page
