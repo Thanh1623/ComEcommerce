@@ -22,20 +22,21 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Thiếu thông tin bắt buộc' }, { status: 400 });
     }
 
+    console.log('Received Order Data:', { name, phone, address, total, items });
     const order = await prisma.order.create({
       data: {
         name,
         phone,
         address,
         total,
-        items,
+        items: JSON.stringify(items), // Send as JSON string to be safe
       },
     });
 
     return NextResponse.json(order, { status: 201 });
   } catch (error) {
     console.error('Lỗi khi tạo đơn hàng:', error);
-    return NextResponse.json({ error: 'Không thể tạo đơn hàng' }, { status: 500 });
+    return NextResponse.json({ error: `Không thể tạo đơn hàng: ${error instanceof Error ? error.message : 'Unknown error'}` }, { status: 500 });
   }
 }
 
