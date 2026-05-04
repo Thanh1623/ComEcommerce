@@ -25,21 +25,21 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
 
         <nav className="space-y-2">
-          <Link href="/admin/stats" className="flex items-center gap-3 p-3 hover:bg-emerald-900 rounded-lg transition-colors">
-            <BarChart3 size={20} />
+          <Link href="/admin/stats" className={`flex items-center ${isOpen ? 'gap-3' : 'justify-center'} p-3 hover:bg-emerald-900 rounded-lg transition-colors`}>
+            <BarChart3 size={isOpen ? 20 : 28} />
             {isOpen && <span>Thống kê</span>}
           </Link>
-          <Link href="/admin/orders" className="flex items-center gap-3 p-3 hover:bg-emerald-900 rounded-lg transition-colors">
-            <ShoppingCart size={20} />
+          <Link href="/admin/orders" className={`flex items-center ${isOpen ? 'gap-3' : 'justify-center'} p-3 hover:bg-emerald-900 rounded-lg transition-colors`}>
+            <ShoppingCart size={isOpen ? 20 : 28} />
             {isOpen && <span>Đơn hàng</span>}
           </Link>
-          <Link href="/admin/products" className="flex items-center gap-3 p-3 hover:bg-emerald-900 rounded-lg transition-colors">
-            <Package size={20} />
+          <Link href="/admin/products" className={`flex items-center ${isOpen ? 'gap-3' : 'justify-center'} p-3 hover:bg-emerald-900 rounded-lg transition-colors`}>
+            <Package size={isOpen ? 20 : 28} />
             {isOpen && <span>Sản phẩm</span>}
           </Link>
           <div className="border-t border-emerald-900 my-4" />
-          <Link href="/" className="flex items-center gap-3 p-3 hover:bg-emerald-900 rounded-lg transition-colors">
-            <Home size={20} />
+          <Link href="/" className={`flex items-center ${isOpen ? 'gap-3' : 'justify-center'} p-3 hover:bg-emerald-900 rounded-lg transition-colors`}>
+            <Home size={isOpen ? 20 : 28} />
             {isOpen && <span>Trang chủ</span>}
           </Link>
         </nav>
