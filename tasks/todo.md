@@ -51,6 +51,7 @@
 - [x] Implement API Routes for Orders
 
 ## Phase 10: Admin Protection & Dashboard
-- [in_progress] Create Middleware for Admin protection
-- [pending] Create Admin Layout (Sidebar/Nav)
-- [pending] Migrate existing Admin pages
+- [x] Create Middleware for Admin protection
+- [x] Create Admin Layout (Sidebar/Nav)
+- [x] Migrate existing Admin pages
+- [x] Create statistics dashboard with charts
