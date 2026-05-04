@@ -50,6 +50,7 @@
 - [x] Implement API Routes for Products
 - [x] Implement API Routes for Orders
 
-## Phase 9: Admin Dashboard
-- [x] Create Admin page
-- [x] Fetch and display orders
+## Phase 10: Admin Protection & Dashboard
+- [in_progress] Create Middleware for Admin protection
+- [pending] Create Admin Layout (Sidebar/Nav)
+- [pending] Migrate existing Admin pages

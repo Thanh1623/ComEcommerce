@@ -23,14 +23,20 @@ export default function OrderList({ initialOrders }: { initialOrders: Order[] })
   const [orders, setOrders] = useState<Order[]>(initialOrders);
 
   useEffect(() => {
-    // Subscribe to changes in the "Order" table
+    // Cấu hình channel theo chuẩn Supabase
     const channel = supabase
-      .channel('public:Order')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'Order' }, (payload) => {
-        console.log('Change received!', payload);
-        fetchOrders(); // Re-fetch orders on any change
-      })
-      .subscribe();
+      .channel('order-changes')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'Order' },
+        (payload) => {
+          console.log('Realtime update received:', payload);
+          fetchOrders(); // Tải lại dữ liệu khi có thay đổi
+        }
+      )
+      .subscribe((status) => {
+        console.log('Subscription status:', status);
+      });
 
     return () => {
       supabase.removeChannel(channel);
@@ -41,6 +47,8 @@ export default function OrderList({ initialOrders }: { initialOrders: Order[] })
     const res = await fetch('/api/orders');
     if (res.ok) {
         setOrders(await res.json());
+    } else {
+        console.error('Failed to fetch orders');
     }
   };
 

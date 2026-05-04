@@ -13,7 +13,7 @@ export default async function AdminPage() {
   }));
 
   return (
-    <div className="py-20 px-6 max-w-6xl mx-auto">
+    <div className="max-w-6xl mx-auto">
       <h2 className="text-5xl font-extrabold mb-12 text-center text-emerald-800 tracking-tight">Quản Lý Đơn Hàng</h2>
       <OrderList initialOrders={sanitizedOrders as any} />
     </div>
