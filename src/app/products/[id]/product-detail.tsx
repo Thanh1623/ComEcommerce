@@ -26,7 +26,7 @@ export default function ProductDetail({ product }: { product: Product }) {
         <div className="text-center mt-8">
             <button 
                 onClick={handleAddToCart}
-                className="bg-emerald-700 text-white px-10 py-4 rounded-full text-lg hover:bg-emerald-600 transition"
+                className="bg-emerald-700 text-white px-10 py-4 rounded-full text-lg hover:bg-emerald-600 transition cursor-pointer"
             >
                 Thêm vào giỏ hàng
             </button>
