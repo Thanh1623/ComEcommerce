@@ -23,19 +23,21 @@ export default function OrderList({ initialOrders }: { initialOrders: Order[] })
   const [orders, setOrders] = useState<Order[]>(initialOrders);
 
   useEffect(() => {
+    if (!supabase) return;
+
     // Cấu hình channel theo chuẩn Supabase
     const channel = supabase
       .channel('order-changes')
       .on(
         'postgres_changes',
-        { event: '*', schema: 'public', table: 'Order' },
+        { event: 'INSERT', schema: 'public', table: 'Order' }, // Thay đổi để bắt INSERT cụ thể
         (payload) => {
-          console.log('Realtime update received:', payload);
+          console.log('Realtime INSERT received:', payload);
           fetchOrders(); // Tải lại dữ liệu khi có thay đổi
         }
       )
       .subscribe((status) => {
-        console.log('Subscription status:', status);
+        console.log('Realtime subscription status:', status);
       });
 
     return () => {
@@ -61,6 +63,10 @@ export default function OrderList({ initialOrders }: { initialOrders: Order[] })
     
     if (res.ok) {
         toast.success('Đã cập nhật trạng thái đơn hàng!');
+        // Cập nhật state ngay lập tức để UI thay đổi
+        setOrders(prevOrders => prevOrders.map(order => 
+            order.id === id ? { ...order, status: status as any } : order
+        ));
     } else {
         const error = await res.json();
         toast.error(`Lỗi: ${error.error}`);
@@ -77,13 +83,15 @@ export default function OrderList({ initialOrders }: { initialOrders: Order[] })
     
     if (res.ok) {
         toast.success('Đã xóa đơn hàng!');
+        // Cập nhật state ngay lập tức để UI thay đổi
+        setOrders(prevOrders => prevOrders.filter(order => order.id !== id));
     } else {
         toast.error('Có lỗi xảy ra khi xóa đơn hàng.');
     }
   };
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto" suppressHydrationWarning={true}>
       <table className="w-full text-left border-separate border-spacing-y-4">
         <thead className="bg-emerald-50 text-emerald-800">
           <tr>

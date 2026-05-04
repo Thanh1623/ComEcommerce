@@ -3,7 +3,7 @@ import { prisma } from '@/lib/prisma';
 import { Resend } from 'resend';
 import { OrderStatus } from '@prisma/client';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 export async function GET() {
   try {
@@ -36,22 +36,24 @@ export async function POST(req: Request) {
     });
 
     // Send email notification
-    await resend.emails.send({
-      from: 'onboarding@resend.dev',
-      to: 'nguyenduythanh1623@gmail.com',
-      subject: `Đơn hàng mới từ ${name}`,
-      html: `
-        <h1>Đơn hàng mới!</h1>
-        <p><strong>Khách hàng:</strong> ${name}</p>
-        <p><strong>Điện thoại:</strong> ${phone}</p>
-        <p><strong>Địa chỉ:</strong> ${address}</p>
-        <h3>Sản phẩm:</h3>
-        <ul>
-          ${items.map((i: any) => `<li>${i.name} x ${i.quantity}</li>`).join('')}
-        </ul>
-        <p><strong>Tổng tiền:</strong> ${total.toLocaleString('vi-VN')} đ</p>
-      `,
-    });
+    if (resend) {
+      await resend.emails.send({
+        from: 'onboarding@resend.dev',
+        to: 'nguyenduythanh1623@gmail.com',
+        subject: `Đơn hàng mới từ ${name}`,
+        html: `
+          <h1>Đơn hàng mới!</h1>
+          <p><strong>Khách hàng:</strong> ${name}</p>
+          <p><strong>Điện thoại:</strong> ${phone}</p>
+          <p><strong>Địa chỉ:</strong> ${address}</p>
+          <h3>Sản phẩm:</h3>
+          <ul>
+            ${items.map((i: any) => `<li>${i.name} x ${i.quantity}</li>`).join('')}
+          </ul>
+          <p><strong>Tổng tiền:</strong> ${total.toLocaleString('vi-VN')} đ</p>
+        `,
+      });
+    }
 
     return NextResponse.json(order, { status: 201 });
   } catch (error) {
@@ -62,17 +64,31 @@ export async function POST(req: Request) {
 
 export async function PATCH(req: Request) {
   try {
-    const { id, status } = await req.json();
+    const body = await req.json();
+    console.log('PATCH request body:', body);
+    const { id, status } = body;
     
     // Explicitly cast to OrderStatus enum
-    const order = await prisma.order.update({
+    const updatedOrder = await prisma.order.update({
       where: { id },
-      data: { status: status as OrderStatus },
+      data: { status: status as OrderStatus, updatedAt: new Date() },
     });
-    return NextResponse.json(order);
+    
+    // Ensure Date objects are serialized properly for JSON
+    const serializedOrder = {
+      ...updatedOrder,
+      createdAt: updatedOrder.createdAt.toISOString(),
+      updatedAt: updatedOrder.updatedAt.toISOString(),
+    };
+
+    console.log('Order updated successfully:', serializedOrder);
+    return NextResponse.json(serializedOrder);
   } catch (error) {
-    console.error('Lỗi khi cập nhật đơn hàng:', error);
-    return NextResponse.json({ error: 'Failed to update order' }, { status: 500 });
+    console.error('Lỗi chi tiết khi cập nhật đơn hàng:', error);
+    return NextResponse.json(
+      { error: `Failed to update order: ${error instanceof Error ? error.message : 'Unknown error'}` },
+      { status: 500 }
+    );
   }
 }
 
