@@ -21,7 +21,10 @@ export async function GET(req: Request) {
     }
 
     const orders = await prisma.order.findMany({
-      where: { createdAt: { gte: startDate } },
+      where: {
+        createdAt: { gte: startDate },
+        status: 'COMPLETED',
+      },
       select: { total: true, createdAt: true },
     });
 
