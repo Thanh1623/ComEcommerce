@@ -159,9 +159,9 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
                 <td className="p-4"><img src={product.image} alt={product.name} className="w-12 h-12 object-cover rounded" /></td>
                 <td className="p-4 text-black font-semibold">{product.name}</td>
                 <td className="p-4 text-black">{product.price.toLocaleString('vi-VN')} đ</td>
-                <td className="p-4 text-center space-x-2">
-                  <button onClick={() => { setEditing(product); setFormData({ name: product.name, description: product.description, price: product.price, image: product.image }); setPreviewUrl(product.image); }} className="text-blue-500 font-semibold cursor-pointer">Sửa</button>
-                  <button onClick={() => deleteProduct(product.id)} className="text-red-500 font-semibold cursor-pointer">Xóa</button>
+                <td className="p-4 text-center space-x-3">
+                  <button onClick={() => { setEditing(product); setFormData({ name: product.name, description: product.description, price: product.price, image: product.image }); setPreviewUrl(product.image); }} className="px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition font-medium cursor-pointer">Sửa</button>
+                  <button onClick={() => deleteProduct(product.id)} className="px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition font-medium cursor-pointer">Xóa</button>
                 </td>
               </tr>
             ))}
