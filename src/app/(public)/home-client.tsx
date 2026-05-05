@@ -4,8 +4,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Product } from '@/data/products';
 
-const sectionVariants = {
+const sectionVariants: any = {
   hidden: { opacity: 0, y: 30 },
   visible: { 
     opacity: 1, 
@@ -147,6 +148,9 @@ export default function HomeClient() {
                         <Link href={`/products/${prod.id}`} key={prod.id}>
                             <motion.div 
                             className="border border-emerald-100 p-4 rounded-2xl shadow-sm bg-white"
+                            initial={{ scale: 1 }}
+                            animate={{ y: [0, -10, 0], scale: 1 }}
+                            transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
                             >
                             <img src={prod.image} alt={prod.name} className="w-full h-48 object-cover rounded-xl mb-4" />
                             <h3 className="text-lg font-bold text-emerald-900 mb-1">{prod.name}</h3>
@@ -174,6 +178,9 @@ export default function HomeClient() {
                       <Link href={`/products/${prod.id}`} key={prod.id}>
                         <motion.div 
                           className="border border-emerald-100 p-4 rounded-2xl shadow-sm bg-white h-full relative z-10"
+                          initial={{ scale: 1 }}
+                          animate={{ y: [0, -10, 0], scale: 1 }}
+                          transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
                         >
                           <img src={prod.image} alt={prod.name} className="w-full h-48 object-cover rounded-xl mb-4" />
                           <h3 className="text-lg font-bold text-emerald-900 mb-1">{prod.name}</h3>
