@@ -149,13 +149,13 @@ export default function HomeClient() {
                 <>
                 <button 
                   onClick={prevSlide} 
-                  className="absolute top-1/2 -left-4 -translate-y-1/2 bg-white text-emerald-800 p-3 rounded-full shadow-md hover:bg-emerald-50 transition-all border border-emerald-100"
+                  className="absolute top-1/2 -left-12 -translate-y-1/2 bg-white text-emerald-800 p-3 rounded-full shadow-md hover:bg-emerald-50 transition-all border border-emerald-100"
                 >
                   <ChevronLeft size={24} />
                 </button>
                 <button 
                   onClick={nextSlide} 
-                  className="absolute top-1/2 -right-4 -translate-y-1/2 bg-white text-emerald-800 p-3 rounded-full shadow-md hover:bg-emerald-50 transition-all border border-emerald-100"
+                  className="absolute top-1/2 -right-12 -translate-y-1/2 bg-white text-emerald-800 p-3 rounded-full shadow-md hover:bg-emerald-50 transition-all border border-emerald-100"
                 >
                   <ChevronRight size={24} />
                 </button>
