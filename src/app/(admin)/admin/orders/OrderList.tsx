@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { toast } from 'sonner';
 import { supabase } from '@/lib/supabase';
 
@@ -22,6 +22,15 @@ interface Order {
 export default function OrderList({ initialOrders }: { initialOrders: Order[] }) {
   const [orders, setOrders] = useState<Order[]>(initialOrders);
 
+  const fetchOrders = useCallback(async () => {
+    const res = await fetch('/api/orders');
+    if (res.ok) {
+        setOrders(await res.json());
+    } else {
+        console.error('Failed to fetch orders');
+    }
+  }, []);
+
   useEffect(() => {
     if (!supabase) return;
 
@@ -41,18 +50,9 @@ export default function OrderList({ initialOrders }: { initialOrders: Order[] })
       });
 
     return () => {
-      supabase.removeChannel(channel);
+      supabase?.removeChannel(channel);
     };
-  }, []);
-
-  const fetchOrders = async () => {
-    const res = await fetch('/api/orders');
-    if (res.ok) {
-        setOrders(await res.json());
-    } else {
-        console.error('Failed to fetch orders');
-    }
-  };
+  }, [fetchOrders]);
 
   const updateStatus = async (id: string, status: string) => {
     const res = await fetch('/api/orders', {

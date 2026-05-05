@@ -71,6 +71,10 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
     let imageUrl = formData.image;
 
     if (file) {
+      if (!supabase) {
+        toast.error('Supabase chưa được cấu hình!');
+        return;
+      }
       const fileName = `${Date.now()}_${file.name}`;
       const { error } = await supabase.storage
         .from('products')

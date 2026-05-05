@@ -13,8 +13,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Cốm Làng Vòng",
-  description: "Cốm Làng Vòng Hà Nội",
+  title: {
+    default: "Cốm Làng Vòng - Đặc sản Hà Nội chính gốc",
+    template: "%s | Cốm Làng Vòng",
+  },
+  description: "Trải nghiệm hương vị Cốm Làng Vòng Hà Nội thơm ngon, chính gốc. Sản phẩm truyền thống, an toàn, đảm bảo chất lượng.",
+  keywords: ["cốm làng vòng", "đặc sản hà nội", "cốm ngon", "đặc sản việt nam"],
+  authors: [{ name: "Cốm Làng Vòng" }],
+  openGraph: {
+    type: "website",
+    locale: "vi_VN",
+    url: "https://comlangvong.vn",
+    siteName: "Cốm Làng Vòng",
+    title: "Cốm Làng Vòng - Đặc sản Hà Nội chính gốc",
+    description: "Trải nghiệm hương vị Cốm Làng Vòng Hà Nội thơm ngon, chính gốc. Sản phẩm truyền thống, an toàn, đảm bảo chất lượng.",
+  },
 };
 
 export default function RootLayout({
@@ -24,7 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="vi"
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
       <body>{children}</body>
