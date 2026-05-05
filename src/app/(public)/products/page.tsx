@@ -12,7 +12,7 @@ export default async function ProductListing() {
 
   return (
     <div className="py-20 px-6 max-w-6xl mx-auto">
-      <h2 className="text-5xl font-extrabold mb-4 text-center text-emerald-800 tracking-tight">Danh Mục Sản Phẩm</h2>
+      <h2 className="text-5xl font-extrabold mb-4 text-center text-emerald-400 tracking-tight">Danh Mục Sản Phẩm</h2>
       <div className="w-24 h-1 bg-emerald-400 mx-auto mb-16 rounded-full"></div>
       {products.length === 0 ? (
         <p className="text-center text-emerald-700">Chưa có sản phẩm nào.</p>
