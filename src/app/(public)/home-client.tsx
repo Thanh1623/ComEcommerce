@@ -89,7 +89,7 @@ export default function HomeClient() {
     <main>
       {/* Hero Section */}
       <motion.section 
-        className="bg-emerald-50 py-24 text-center px-6"
+        className="bg-emerald-50 py-16 text-center px-6"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
@@ -110,7 +110,7 @@ export default function HomeClient() {
       </motion.section>
 
       {/* Featured Products Section */}
-      <section className="py-20 px-6 max-w-6xl mx-auto">
+      <section className="py-12 px-6 max-w-6xl mx-auto">
         <h2 className="text-5xl font-extrabold mb-12 text-center text-emerald-800 tracking-tight">Sản Phẩm Đặc Sản Nổi Bật</h2>
         {featuredProducts.length === 0 ? (
           <p className="text-center text-gray-500">Đang cập nhật sản phẩm nổi bật...</p>
@@ -157,7 +157,7 @@ export default function HomeClient() {
 
       {/* Story Section */}
       <motion.section 
-        className="py-20 px-8 max-w-4xl mx-auto text-center bg-white rounded-3xl shadow-2xl border-t-4 border-emerald-400 my-16"
+        className="py-12 px-8 max-w-4xl mx-auto text-center bg-white rounded-3xl shadow-lg border border-emerald-100 my-8"
         variants={sectionVariants}
         initial="hidden"
         whileInView="visible"
@@ -173,13 +173,13 @@ export default function HomeClient() {
 
       {/* Process Section */}
       <motion.section 
-        className="py-20 px-6 bg-white"
+        className="py-12 px-6 bg-white"
         variants={sectionVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
       >
-        <h2 className="text-4xl font-bold mb-16 text-center text-emerald-800">Quy trình làm Cốm công phu</h2>
+        <h2 className="text-4xl font-bold mb-12 text-center text-emerald-800">Quy trình làm Cốm công phu</h2>
         <motion.div 
           className="grid grid-cols-2 md:grid-cols-5 gap-8 max-w-6xl mx-auto text-center"
           variants={containerVariants}
@@ -198,7 +198,7 @@ export default function HomeClient() {
 
       {/* Contact Section */}
       <motion.section 
-        className="py-20 px-6 max-w-md mx-auto"
+        className="py-12 px-6 max-w-md mx-auto"
         variants={sectionVariants}
         initial="hidden"
         whileInView="visible"
