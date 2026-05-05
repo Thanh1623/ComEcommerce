@@ -5,11 +5,34 @@ export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const isFeatured = searchParams.get('isFeatured') === 'true';
+    const search = searchParams.get('search');
+    const minPrice = searchParams.get('minPrice');
+    const maxPrice = searchParams.get('maxPrice');
+    const sort = searchParams.get('sort');
 
-    console.log('Fetching products, isFeatured:', isFeatured);
+    const where: any = {};
+    if (isFeatured) where.isFeatured = true;
+    if (search) {
+      where.OR = [
+        { name: { contains: search, mode: 'insensitive' } },
+        { description: { contains: search, mode: 'insensitive' } },
+      ];
+    }
+    if (minPrice || maxPrice) {
+      where.price = {};
+      if (minPrice) where.price.gte = parseInt(minPrice);
+      if (maxPrice) where.price.lte = parseInt(maxPrice);
+    }
+
+    let orderBy: any = { createdAt: 'desc' };
+    if (sort === 'priceAsc') orderBy = { price: 'asc' };
+    else if (sort === 'priceDesc') orderBy = { price: 'desc' };
+    else if (sort === 'newest') orderBy = { createdAt: 'desc' };
+
+    console.log('Fetching products, where:', where, 'orderBy:', orderBy);
     const products = await prisma.product.findMany({
-      where: isFeatured ? { isFeatured: true } : {},
-      orderBy: { createdAt: 'desc' },
+      where,
+      orderBy,
     });
     return NextResponse.json(products);
   } catch (error) {

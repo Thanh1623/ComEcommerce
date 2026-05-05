@@ -115,9 +115,9 @@ export default function HomeClient() {
         <p className="text-xl mb-10 text-emerald-700 max-w-2xl mx-auto">
           Mang hương vị mùa thu Hà Nội vào từng sản phẩm cốm truyền thống.
         </p>
-        <button className="bg-emerald-700 text-white px-10 py-4 rounded-full text-lg hover:bg-emerald-600 transition">
+        <Link href="/products" className="bg-emerald-700 text-white px-10 py-4 rounded-full text-lg hover:bg-emerald-600 transition">
           Đặt Mua Ngay
-        </button>
+        </Link>
       </motion.section>
 
       {/* Featured Products Section */}
@@ -128,7 +128,37 @@ export default function HomeClient() {
           <p className="text-center text-gray-500">Đang cập nhật sản phẩm nổi bật...</p>
         ) : (
           <div className="relative">
-            <div className="overflow-hidden">
+            {/* Mobile Swipe Wrapper */}
+            <div className="md:hidden relative cursor-grab active:cursor-grabbing overflow-hidden">
+                <motion.div 
+                    drag="x"
+                    dragConstraints={{ left: 0, right: 0 }}
+                    dragElastic={0.2}
+                    onDragEnd={(e, { offset, velocity }) => {
+                        const swipe = offset.x;
+                        if (swipe < -50) nextSlide();
+                        else if (swipe > 50) prevSlide();
+                    }}
+                    className="grid grid-cols-1 gap-6 p-4"
+                >
+                    {featuredProducts
+                        .slice(currentIndex * itemsPerPage, (currentIndex + 1) * itemsPerPage)
+                        .map((prod) => (
+                        <Link href={`/products/${prod.id}`} key={prod.id}>
+                            <motion.div 
+                            className="border border-emerald-100 p-4 rounded-2xl shadow-sm bg-white"
+                            >
+                            <img src={prod.image} alt={prod.name} className="w-full h-48 object-cover rounded-xl mb-4" />
+                            <h3 className="text-lg font-bold text-emerald-900 mb-1">{prod.name}</h3>
+                            <p className="text-emerald-700 font-semibold">{prod.price.toLocaleString('vi-VN')} đ</p>
+                            </motion.div>
+                        </Link>
+                        ))}
+                </motion.div>
+            </div>
+
+            {/* Desktop View */}
+            <div className="hidden md:block relative overflow-hidden">
               <AnimatePresence mode='wait'>
                 <motion.div 
                   key={currentIndex}
@@ -136,7 +166,7 @@ export default function HomeClient() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -100 }}
                   transition={{ duration: 0.3 }}
-                  className="grid grid-cols-1 md:grid-cols-4 gap-6 p-4"
+                  className="grid md:grid-cols-4 gap-6 p-4"
                 >
                   {featuredProducts
                     .slice(currentIndex * itemsPerPage, (currentIndex + 1) * itemsPerPage)
@@ -144,9 +174,6 @@ export default function HomeClient() {
                       <Link href={`/products/${prod.id}`} key={prod.id}>
                         <motion.div 
                           className="border border-emerald-100 p-4 rounded-2xl shadow-sm bg-white h-full relative z-10"
-                          initial={{ scale: 1 }}
-                          animate={{ y: [0, -10, 0], scale: 1 }}
-                          transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
                         >
                           <img src={prod.image} alt={prod.name} className="w-full h-48 object-cover rounded-xl mb-4" />
                           <h3 className="text-lg font-bold text-emerald-900 mb-1">{prod.name}</h3>
@@ -157,8 +184,23 @@ export default function HomeClient() {
                 </motion.div>
               </AnimatePresence>
             </div>
+
+            {/* Pagination Dots */}
             {totalSlides > 1 && (
-                <>
+                <div className="flex justify-center gap-2 mt-6">
+                    {Array.from({ length: totalSlides }).map((_, idx) => (
+                        <button
+                            key={idx}
+                            onClick={() => setCurrentIndex(idx)}
+                            className={`h-3 w-3 rounded-full transition-all ${currentIndex === idx ? 'bg-emerald-600 w-8' : 'bg-emerald-200'}`}
+                        />
+                    ))}
+                </div>
+            )}
+
+            {/* Desktop Arrows */}
+            {totalSlides > 1 && (
+                <div className="hidden md:block">
                 <button 
                   onClick={prevSlide} 
                   className="absolute top-1/2 -left-12 -translate-y-1/2 bg-white text-emerald-800 p-3 rounded-full shadow-md hover:bg-emerald-50 transition-all border border-emerald-100"
@@ -171,7 +213,7 @@ export default function HomeClient() {
                 >
                   <ChevronRight size={24} />
                 </button>
-                </>
+                </div>
             )}
           </div>
         )}
