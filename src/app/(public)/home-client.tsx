@@ -132,9 +132,9 @@ export default function HomeClient() {
                       <Link href={`/products/${prod.id}`} key={prod.id}>
                         <motion.div 
                           className="border border-emerald-100 p-4 rounded-2xl shadow-sm hover:shadow-lg transition bg-white h-full"
-                          animate={{ y: [0, -15, 0] }}
+                          animate={{ y: [0, -10, 0] }}
                           transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                          whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+                          whileHover={{ scale: 1.05 }}
                         >
                           <img src={prod.image} alt={prod.name} className="w-full h-48 object-cover rounded-xl mb-4" />
                           <h3 className="text-lg font-bold text-emerald-900 mb-1">{prod.name}</h3>
