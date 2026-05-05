@@ -172,6 +172,7 @@ export default function HomeClient() {
         <h2 className="text-4xl font-bold mb-16 text-center text-emerald-800">Quy trình làm Cốm công phu</h2>
         <motion.div 
           className="grid grid-cols-2 md:grid-cols-5 gap-8 max-w-6xl mx-auto text-center"
+          variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
