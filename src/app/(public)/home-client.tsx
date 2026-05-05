@@ -157,7 +157,7 @@ export default function HomeClient() {
 
       {/* Story Section */}
       <motion.section 
-        className="py-12 px-8 max-w-4xl mx-auto text-center bg-white rounded-3xl shadow-lg border border-emerald-100 my-8"
+        className="px-8 max-w-4xl mx-auto text-center bg-white rounded-3xl shadow-lg border border-emerald-100 mb-12"
         variants={sectionVariants}
         initial="hidden"
         whileInView="visible"
