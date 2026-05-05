@@ -122,7 +122,8 @@ export default function HomeClient() {
 
       {/* Featured Products Section */}
       <section className="py-12 px-6 max-w-6xl mx-auto">
-        <h2 className="text-5xl font-extrabold mb-12 text-center text-emerald-800 tracking-tight">Sản Phẩm Đặc Sản Nổi Bật</h2>
+        <h2 className="text-5xl font-extrabold mb-4 text-center text-emerald-800 tracking-tight">Sản Phẩm Đặc Sản Nổi Bật</h2>
+        <div className="w-24 h-1 bg-emerald-400 mx-auto mb-12 rounded-full"></div>
         {featuredProducts.length === 0 ? (
           <p className="text-center text-gray-500">Đang cập nhật sản phẩm nổi bật...</p>
         ) : (
