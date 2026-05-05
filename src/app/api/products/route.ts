@@ -6,13 +6,15 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const isFeatured = searchParams.get('isFeatured') === 'true';
 
+    console.log('Fetching products, isFeatured:', isFeatured);
     const products = await prisma.product.findMany({
       where: isFeatured ? { isFeatured: true } : {},
       orderBy: { createdAt: 'desc' },
     });
     return NextResponse.json(products);
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to fetch products' }, { status: 500 });
+    console.error('API Error in GET /api/products:', error);
+    return NextResponse.json({ error: `Failed to fetch products: ${error instanceof Error ? error.message : 'Unknown error'}` }, { status: 500 });
   }
 }
 

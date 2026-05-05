@@ -30,8 +30,21 @@ export default function HomeClient() {
 
   useEffect(() => {
     fetch('/api/products?isFeatured=true')
-      .then(res => res.json())
-      .then(data => setFeaturedProducts(data));
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to fetch');
+        return res.json();
+      })
+      .then(data => {
+        if (Array.isArray(data)) {
+          setFeaturedProducts(data);
+        } else {
+          setFeaturedProducts([]);
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        setFeaturedProducts([]);
+      });
   }, []);
 
   const totalSlides = Math.ceil(featuredProducts.length / itemsPerPage);
@@ -132,7 +145,79 @@ export default function HomeClient() {
         )}
       </section>
 
-      {/* ... rest of the file (Story, Process, Contact) */}
+      {/* Story Section */}
+      <motion.section 
+        className="py-20 px-8 max-w-4xl mx-auto text-center bg-white rounded-3xl shadow-2xl border-t-4 border-emerald-400 my-16"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        <h2 className="text-4xl font-extrabold mb-8 text-emerald-800">Câu chuyện Cốm Làng Vòng</h2>
+        <p className="text-xl text-emerald-700 leading-relaxed italic">
+          "Cốm Làng Vòng không chỉ là một món ăn, mà là cả một nền văn hóa, một mảnh hồn của Hà Nội cổ kính. 
+          Qua bao thăng trầm, nghề làm cốm tại Làng Vòng vẫn được gìn giữ như một báu vật, 
+          chắt lọc những hạt lúa nếp cái hoa vàng tinh túy nhất của đất trời."
+        </p>
+      </motion.section>
+
+      {/* Process Section */}
+      <motion.section 
+        className="py-20 px-6 bg-white"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        <h2 className="text-4xl font-bold mb-16 text-center text-emerald-800">Quy trình làm Cốm công phu</h2>
+        <motion.div 
+          className="grid grid-cols-2 md:grid-cols-5 gap-8 max-w-6xl mx-auto text-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          {['Tuyển chọn', 'Ngâm lúa', 'Rang cốm', 'Giã cốm', 'Gói lá'].map((step, idx) => (
+            <motion.div key={step}>
+              <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-600 font-bold text-xl">{idx + 1}</div>
+              <h3 className="font-semibold text-emerald-700">{step}</h3>
+            </motion.div>
+          ))}
+        </motion.div>
+      </motion.section>
+
+      {/* Contact Section */}
+      <motion.section 
+        className="py-20 px-6 max-w-md mx-auto"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <h2 className="text-3xl font-bold mb-8 text-center text-emerald-800">Liên Hệ Đặt Hàng</h2>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <div>
+            <input
+              type="text"
+              placeholder="Họ và tên"
+              className="w-full border border-gray-300 p-3 rounded"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            />
+            {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+          </div>
+          <div>
+            <input
+              type="email"
+              placeholder="Email"
+              className="w-full border border-gray-300 p-3 rounded"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            />
+            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+          </div>
+          <button type="submit" className="bg-emerald-700 text-white p-3 rounded hover:bg-emerald-600 transition font-bold text-lg">Gửi Yêu Cầu</button>
+        </form>
+      </motion.section>
     </main>
   );
 }
