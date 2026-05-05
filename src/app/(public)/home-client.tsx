@@ -147,8 +147,18 @@ export default function HomeClient() {
             </div>
             {totalSlides > 1 && (
                 <>
-                <button onClick={prevSlide} className="absolute top-1/2 -left-4 bg-emerald-700 text-white p-2 rounded-full shadow-lg"><ChevronLeft /></button>
-                <button onClick={nextSlide} className="absolute top-1/2 -right-4 bg-emerald-700 text-white p-2 rounded-full shadow-lg"><ChevronRight /></button>
+                <button 
+                  onClick={prevSlide} 
+                  className="absolute top-1/2 -left-4 -translate-y-1/2 bg-white text-emerald-800 p-3 rounded-full shadow-md hover:bg-emerald-50 transition-all border border-emerald-100"
+                >
+                  <ChevronLeft size={24} />
+                </button>
+                <button 
+                  onClick={nextSlide} 
+                  className="absolute top-1/2 -right-4 -translate-y-1/2 bg-white text-emerald-800 p-3 rounded-full shadow-md hover:bg-emerald-50 transition-all border border-emerald-100"
+                >
+                  <ChevronRight size={24} />
+                </button>
                 </>
             )}
           </div>
@@ -157,7 +167,7 @@ export default function HomeClient() {
 
       {/* Story Section */}
       <motion.section 
-        className="px-8 max-w-4xl mx-auto text-center bg-white rounded-3xl shadow-lg border border-emerald-100 mb-12"
+        className="py-12 px-8 max-w-4xl mx-auto text-center bg-white rounded-3xl shadow-lg border border-emerald-100 my-8"
         variants={sectionVariants}
         initial="hidden"
         whileInView="visible"
