@@ -124,7 +124,7 @@ export default function HomeClient() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -100 }}
                   transition={{ duration: 0.3 }}
-                  className="grid grid-cols-1 md:grid-cols-4 gap-6"
+                  className="grid grid-cols-1 md:grid-cols-4 gap-6 p-4"
                 >
                   {featuredProducts
                     .slice(currentIndex * itemsPerPage, (currentIndex + 1) * itemsPerPage)
@@ -134,7 +134,6 @@ export default function HomeClient() {
                           className="border border-emerald-100 p-4 rounded-2xl shadow-sm hover:shadow-lg transition bg-white h-full relative z-10"
                           animate={{ y: [0, -10, 0] }}
                           transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-                          whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
                         >
                           <img src={prod.image} alt={prod.name} className="w-full h-48 object-cover rounded-xl mb-4" />
                           <h3 className="text-lg font-bold text-emerald-900 mb-1">{prod.name}</h3>
