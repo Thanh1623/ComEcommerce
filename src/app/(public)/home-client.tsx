@@ -14,16 +14,21 @@ const sectionVariants = {
   }
 };
 
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-  isFeatured: boolean;
-}
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: { 
+    opacity: 1,
+    transition: { staggerChildren: 0.2 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 }
+};
 
 export default function HomeClient() {
+
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsPerPage = 4;
@@ -178,7 +183,7 @@ export default function HomeClient() {
           viewport={{ once: true, amount: 0.3 }}
         >
           {['Tuyển chọn', 'Ngâm lúa', 'Rang cốm', 'Giã cốm', 'Gói lá'].map((step, idx) => (
-            <motion.div key={step}>
+            <motion.div key={step} variants={itemVariants}>
               <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-600 font-bold text-xl">{idx + 1}</div>
               <h3 className="font-semibold text-emerald-700">{step}</h3>
             </motion.div>
