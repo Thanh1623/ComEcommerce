@@ -131,7 +131,7 @@ export default function HomeClient() {
                     .map((prod) => (
                       <Link href={`/products/${prod.id}`} key={prod.id}>
                         <motion.div 
-                          className="border border-emerald-100 p-4 rounded-2xl shadow-sm hover:shadow-lg transition bg-white h-full relative z-10"
+                          className="border border-emerald-100 p-4 rounded-2xl shadow-sm bg-white h-full relative z-10"
                           animate={{ y: [0, -10, 0] }}
                           transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
                         >
