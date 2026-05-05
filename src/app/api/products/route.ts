@@ -1,9 +1,13 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
+    const { searchParams } = new URL(req.url);
+    const isFeatured = searchParams.get('isFeatured') === 'true';
+
     const products = await prisma.product.findMany({
+      where: isFeatured ? { isFeatured: true } : {},
       orderBy: { createdAt: 'desc' },
     });
     return NextResponse.json(products);
@@ -33,10 +37,17 @@ export async function POST(req: Request) {
 
 export async function PATCH(req: Request) {
   try {
-    const { id, name, description, price, image } = await req.json();
+    const body = await req.json();
+    const { id, ...data } = body;
+    
+    // Convert price to int if it's in the data
+    if (data.price) {
+        data.price = parseInt(data.price);
+    }
+    
     const product = await prisma.product.update({
       where: { id },
-      data: { name, description, price: parseInt(price), image },
+      data,
     });
     return NextResponse.json(product);
   } catch (error) {

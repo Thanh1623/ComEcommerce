@@ -10,6 +10,7 @@ interface Product {
   description: string;
   price: number;
   image: string;
+  isFeatured: boolean;
 }
 
 export default function ProductList({ initialProducts }: { initialProducts: Product[] }) {
@@ -108,6 +109,16 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
     fetchProducts();
   };
 
+  const toggleFeatured = async (id: string, isFeatured: boolean) => {
+    await fetch('/api/products', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, isFeatured }),
+    });
+    toast.success(`Đã ${isFeatured ? 'đánh dấu' : 'bỏ'} nổi bật!`);
+    fetchProducts();
+  };
+
   return (
     <div className="space-y-10">
       <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl shadow-xl border-2 border-emerald-100 space-y-4">
@@ -154,6 +165,7 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
               <th className="p-4">Hình</th>
               <th className="p-4">Tên</th>
               <th className="p-4">Giá</th>
+              <th className="p-4 text-center">Nổi bật</th>
               <th className="p-4 text-center">Hành động</th>
             </tr>
           </thead>
@@ -163,6 +175,14 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
                 <td className="p-4"><img src={product.image} alt={product.name} className="w-12 h-12 object-cover rounded" /></td>
                 <td className="p-4 text-black font-semibold">{product.name}</td>
                 <td className="p-4 text-black">{product.price.toLocaleString('vi-VN')} đ</td>
+                <td className="p-4 text-center">
+                    <input 
+                      type="checkbox" 
+                      checked={product.isFeatured} 
+                      onChange={(e) => toggleFeatured(product.id, e.target.checked)}
+                      className="w-5 h-5 cursor-pointer accent-emerald-600"
+                    />
+                </td>
                 <td className="p-4 text-center space-x-2">
                   <button onClick={() => { setEditing(product); setFormData({ name: product.name, description: product.description, price: product.price, image: product.image }); setPreviewUrl(product.image); }} className="px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition font-medium cursor-pointer">Sửa</button>
                   <button onClick={() => deleteProduct(product.id)} className="px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition font-medium cursor-pointer">Xóa</button>
