@@ -58,7 +58,10 @@
 - [x] Set statistics dashboard as admin default page
 - [x] Implement Featured Products slider with database integration
 
-## Phase 12: Optimization & Documentation
-- [ ] Performance Audit (Images, Bundle Size, Server Components)
-- [ ] Improve documentation (Update Knowledge Index, ADRs)
+## Phase 11: Advanced Search & Filtering
+- [ ] Create Search component
+- [ ] Implement Filter Sidebar component (Category, Price)
+- [ ] Update Product API to support filtering/searching/sorting
+- [ ] Synchronize filters with URL search params
+- [ ] Implement Sorting functionality
 
