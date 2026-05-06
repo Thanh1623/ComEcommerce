@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
+import Image from 'next/image';
 import { toast } from 'sonner';
 import { supabase } from '@/lib/supabase';
 
@@ -152,7 +153,7 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
             </label>
             {errors.image && <p className="text-red-500 text-sm mt-1">{errors.image}</p>}
             {(previewUrl || formData.image) && (
-                <img src={previewUrl || formData.image} alt="Preview" className="mt-4 w-32 h-32 object-cover rounded-lg border-2 border-emerald-200" />
+                <Image src={previewUrl || formData.image} alt="Preview" width={128} height={128} className="mt-4 w-32 h-32 object-cover rounded-lg border-2 border-emerald-200" />
             )}
         </div>
         
@@ -176,7 +177,7 @@ export default function ProductList({ initialProducts }: { initialProducts: Prod
           <tbody>
             {products.map((product) => (
               <tr key={product.id} className="border-t border-emerald-100">
-                <td className="p-4"><img src={product.image} alt={product.name} className="w-12 h-12 object-cover rounded" /></td>
+                <td className="p-4"><Image src={product.image} alt={product.name} width={48} height={48} className="w-12 h-12 object-cover rounded" /></td>
                 <td className="p-4 text-black font-semibold">{product.name}</td>
                 <td className="p-4 text-black">{product.price.toLocaleString('vi-VN')} đ</td>
                 <td className="p-4 text-center">
