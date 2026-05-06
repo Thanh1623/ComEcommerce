@@ -25,8 +25,8 @@ export default function FeaturedProductsSlider({ products }: FeaturedProductsSli
 
   return (
     <div className="relative">
-      {/* Mobile Swipe Wrapper */}
-      <div className="md:hidden relative cursor-grab active:cursor-grabbing overflow-hidden">
+      {/* Mobile/Tablet Swipe Wrapper */}
+      <div className="lg:hidden relative cursor-grab active:cursor-grabbing overflow-hidden">
         <motion.div 
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
@@ -36,7 +36,7 @@ export default function FeaturedProductsSlider({ products }: FeaturedProductsSli
             if (swipe < -50) nextSlide();
             else if (swipe > 50) prevSlide();
           }}
-          className="grid grid-cols-1 gap-6 p-4"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4"
         >
           {products
             .slice(currentIndex * itemsPerPage, (currentIndex + 1) * itemsPerPage)
@@ -58,7 +58,7 @@ export default function FeaturedProductsSlider({ products }: FeaturedProductsSli
       </div>
 
       {/* Desktop View */}
-      <div className="hidden md:block relative overflow-hidden">
+      <div className="hidden lg:block relative overflow-hidden">
         <AnimatePresence mode='wait'>
           <motion.div 
             key={currentIndex}
@@ -66,7 +66,7 @@ export default function FeaturedProductsSlider({ products }: FeaturedProductsSli
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -100 }}
             transition={{ duration: 0.3 }}
-            className="grid md:grid-cols-4 gap-6 p-4"
+            className="grid lg:grid-cols-4 gap-6 p-4"
           >
             {products
               .slice(currentIndex * itemsPerPage, (currentIndex + 1) * itemsPerPage)
@@ -103,7 +103,7 @@ export default function FeaturedProductsSlider({ products }: FeaturedProductsSli
 
       {/* Desktop Arrows */}
       {totalSlides > 1 && (
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           <button 
             onClick={prevSlide} 
             className="absolute top-1/2 -left-12 -translate-y-1/2 bg-white text-emerald-800 p-3 rounded-full shadow-md hover:bg-emerald-50 transition-all border border-emerald-100"
