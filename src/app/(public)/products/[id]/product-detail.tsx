@@ -1,22 +1,12 @@
-'use client';
-
-import { useCart } from '@/context/CartContext';
 import Image from 'next/image';
-import { toast } from 'sonner';
 import { Product } from '@/data/products';
+import AddToCartButton from '@/components/cart/AddToCartButton';
 
 interface ProductDetailProps {
   product: Product;
 }
 
-export default function ProductDetail({ product }: { product: Product }) {
-  const { addToCart } = useCart();
-
-  const handleAddToCart = () => {
-    addToCart(product);
-    toast.success(`${product.name} đã được thêm vào giỏ hàng!`);
-  };
-
+export default function ProductDetail({ product }: ProductDetailProps) {
   return (
     <div className="py-20 px-6 max-w-4xl mx-auto">
       <div className="border-2 border-emerald-100 p-8 rounded-2xl shadow-xl bg-white">
@@ -25,12 +15,7 @@ export default function ProductDetail({ product }: { product: Product }) {
         <p className="text-emerald-700 mb-6 text-lg text-center">{product.description}</p>
         <p className="text-3xl font-bold text-emerald-950 text-center">{product.price.toLocaleString('vi-VN')} đ</p>
         <div className="text-center mt-8">
-            <button 
-                onClick={handleAddToCart}
-                className="bg-emerald-700 text-white px-10 py-4 rounded-full text-lg hover:bg-emerald-600 transition cursor-pointer"
-            >
-                Thêm vào giỏ hàng
-            </button>
+            <AddToCartButton product={product} />
         </div>
       </div>
     </div>
