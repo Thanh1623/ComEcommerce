@@ -95,7 +95,7 @@ export default function FeaturedProductsSlider({ products }: FeaturedProductsSli
             <button
               key={idx}
               onClick={() => setCurrentIndex(idx)}
-              className={`h-3 w-3 rounded-full transition-all ${currentIndex === idx ? 'bg-emerald-600 w-8' : 'bg-emerald-200'}`}
+              className={`h-3 w-3 rounded-full transition-all ${currentIndex === idx ? 'bg-emerald-200 w-8' : 'bg-emerald-600'}`}
             />
           ))}
         </div>
