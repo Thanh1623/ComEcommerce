@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Product } from '@/data/products';
 
@@ -152,7 +153,7 @@ export default function HomeClient() {
                             animate={{ y: [0, -10, 0], scale: 1 }}
                             transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
                             >
-                            <img src={prod.image} alt={prod.name} className="w-full h-48 object-cover rounded-xl mb-4" />
+                            <Image src={prod.image} alt={prod.name} width={400} height={200} className="w-full h-48 object-cover rounded-xl mb-4" />
                             <h3 className="text-lg font-bold text-emerald-900 mb-1">{prod.name}</h3>
                             <p className="text-emerald-700 font-semibold">{prod.price.toLocaleString('vi-VN')} đ</p>
                             </motion.div>
@@ -182,7 +183,7 @@ export default function HomeClient() {
                           animate={{ y: [0, -10, 0], scale: 1 }}
                           transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
                         >
-                          <img src={prod.image} alt={prod.name} className="w-full h-48 object-cover rounded-xl mb-4" />
+                          <Image src={prod.image} alt={prod.name} width={400} height={200} className="w-full h-48 object-cover rounded-xl mb-4" />
                           <h3 className="text-lg font-bold text-emerald-900 mb-1">{prod.name}</h3>
                           <p className="text-emerald-700 font-semibold">{prod.price.toLocaleString('vi-VN')} đ</p>
                         </motion.div>
